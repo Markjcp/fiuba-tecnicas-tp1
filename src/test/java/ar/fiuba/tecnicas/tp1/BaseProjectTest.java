@@ -11,4 +11,8 @@ public class BaseProjectTest {
 		assertEquals(true,true);
 	}
 
+	@Test
+	public void testBaseConfiguration2(){
+		assertEquals(true,true);
+	}
 }

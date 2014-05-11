@@ -1,4 +1,6 @@
-package ar.fiuba.tecnicas.tp1;
+package ar.fiuba.tecnicas.tp1.appenders;
+
+import ar.fiuba.tecnicas.tp1.logger.LogMessage;
 
 public class ConsoleAppender implements LoggerAppender{
 

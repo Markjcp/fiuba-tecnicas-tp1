@@ -1,4 +1,4 @@
-package ar.fiuba.tecnicas.tp1;
+package ar.fiuba.tecnicas.tp1.logger;
 
 public interface LogMessage {
 	

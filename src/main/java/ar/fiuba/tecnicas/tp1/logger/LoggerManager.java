@@ -1,7 +1,10 @@
-package ar.fiuba.tecnicas.tp1;
+package ar.fiuba.tecnicas.tp1.logger;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import ar.fiuba.tecnicas.tp1.factory.LoggerFactory;
+import ar.fiuba.tecnicas.tp1.factory.SimpleLoggerFactory;
 
 public class LoggerManager {
 	

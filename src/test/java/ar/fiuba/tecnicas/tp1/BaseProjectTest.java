@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import ar.fiuba.tecnicas.tp1.logger.Level;
+import ar.fiuba.tecnicas.tp1.logger.Logger;
+
 public class BaseProjectTest {
 	
 	private static Logger logger = Logger.getLogger(BaseProjectTest.class);

@@ -1,0 +1,42 @@
+package ar.fiuba.tecnicas.tp1.appenders;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import ar.fiuba.tecnicas.tp1.exceptions.AppendException;
+import ar.fiuba.tecnicas.tp1.logger.LogMessage;
+
+public class FileAppender implements LoggerAppender {
+
+	private String fileName;
+
+	public FileAppender(String fileName) {
+		super();
+		this.fileName = fileName;
+	}
+
+	public void doLog(LogMessage message) {
+		try {
+
+			File file = new File(fileName);
+
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(message.getFormattedMessage());
+			bw.newLine();
+			bw.close();
+
+		} catch (IOException e) {
+			throw new AppendException("Error writing in file");
+		}
+
+	}
+
+}

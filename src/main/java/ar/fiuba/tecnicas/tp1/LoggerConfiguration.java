@@ -3,7 +3,7 @@ package ar.fiuba.tecnicas.tp1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoggerConfiguration {
+public class LoggerConfiguration implements LoggerConfigurable {
 
 	private Level level;
 

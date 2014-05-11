@@ -33,10 +33,6 @@ public class LoggerManager {
 		return factory.createLogger();
 	}
 
-	public LoggerFactory getFactory() {
-		return factory;
-	}
-
 	public void setFactory(LoggerFactory factory) {
 		this.factory = factory;
 	}	

@@ -1,6 +1,8 @@
 package ar.fiuba.tecnicas.tp1;
 
 public final class Level implements Comparable<Level> {
+	
+	public static final Level OFF;
 
 	public static final Level INFO;
 
@@ -13,6 +15,7 @@ public final class Level implements Comparable<Level> {
 	private final int intLevel;
 
 	static {
+		OFF = new Level(0);
 		INFO = new Level(1000);
 		WARN = new Level(2000);
 		ERROR = new Level(3000);

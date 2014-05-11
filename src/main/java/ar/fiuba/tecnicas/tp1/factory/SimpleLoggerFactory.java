@@ -12,12 +12,10 @@ import ar.fiuba.tecnicas.tp1.logger.LoggerConfigurationBuilder;
 
 public class SimpleLoggerFactory implements LoggerFactory {
 	
-	private static final String LOG_FILE="/home/marcos/log.txt";
-
 	public Logger createLogger() {
 		List<LoggerAppender> appenders = new ArrayList<LoggerAppender>();
 		appenders.add(new ConsoleAppender());
-		appenders.add(new FileAppender(LOG_FILE));
+		appenders.add(new FileAppender(CreationConstants.DEFAULT_LOG_OUTPUT_FILE));
 		Logger logger = new Logger(new LoggerConfigurationBuilder()
 				.setEnabled(true).setLevel(Level.ERROR).setAppenders(appenders)
 				.build());

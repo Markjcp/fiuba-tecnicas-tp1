@@ -11,6 +11,8 @@ import ar.fiuba.tecnicas.tp1.logger.LogMessage;
 public class FileAppender implements LoggerAppender {
 
 	private String fileName;
+	
+	private String appenderName;
 
 	public FileAppender(String fileName) {
 		super();
@@ -38,5 +40,13 @@ public class FileAppender implements LoggerAppender {
 		}
 
 	}
+
+	public String getAppenderName() {
+		return appenderName;
+	}
+
+	public void setAppenderName(String appenderName) {
+		this.appenderName = appenderName;
+	}	
 
 }

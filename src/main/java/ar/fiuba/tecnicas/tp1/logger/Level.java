@@ -1,5 +1,8 @@
 package ar.fiuba.tecnicas.tp1.logger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class Level implements Comparable<Level> {
 	
 	public static final Level OFF;
@@ -13,13 +16,21 @@ public final class Level implements Comparable<Level> {
 	public static final Level FATAL;
 
 	private final int intLevel;
+	
+	private static Map<String,Level> levels;
 
 	static {
-		OFF = new Level(0);
+		levels = new HashMap<String, Level>();
+		OFF = new Level(10000);
+		levels.put("OFF", OFF);
 		INFO = new Level(1000);
+		levels.put("INFO", INFO);
 		WARN = new Level(2000);
+		levels.put("WARN", WARN);
 		ERROR = new Level(3000);
+		levels.put("ERROR", ERROR);
 		FATAL = new Level(4000);
+		levels.put("FATAL", FATAL);
 	}
 
 	public Level(int intLevel) {
@@ -30,6 +41,10 @@ public final class Level implements Comparable<Level> {
 	public int compareTo(Level other) {
 		return intLevel < other.intLevel ? -1 : (intLevel > other.intLevel ? 1
 				: 0);
+	}
+	
+	public static Level getLevelFromString(String levelName){
+		return levels.get(levelName);
 	}
 
 }

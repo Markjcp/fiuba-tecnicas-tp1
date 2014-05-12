@@ -6,9 +6,9 @@ import java.util.Properties;
 
 public class PropertyLoader {
 	
-	public static Properties loadProperties() throws IOException{
+	public static Properties loadProperties(String source) throws IOException{
 		Properties defaultProps = new Properties();
-		FileInputStream in = new FileInputStream("defaultProperties");
+		FileInputStream in = new FileInputStream(source);
 		defaultProps.load(in);
 		in.close();
 		return defaultProps;

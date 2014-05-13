@@ -1,20 +1,29 @@
 package ar.fiuba.tecnicas.tp1.logger;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MessageFormatApplier {
 	
 	private MessageFormat messageFormat;
+	// TODO: Deberia permitir levantarlo de properties
+	private char delimiter = '-';
 	
 	public MessageFormatApplier(String format) {
 		this.messageFormat = new MessageFormat(format);
 	}
 	
 	public String applyFormat(String message) {
-		return getDate() + getLevel() + getActualThread() + message + 
+		return getDate() + getLevel() + getCurrentThread() + message + 
 				getLineNumber() + getFileName() + getMethodName();
 	}
 	
 	private String getDate() {
-		//TODO: Deberia devolver la fecha mas un separador
+		if (!this.messageFormat.getDateFormat().isEmpty()) {
+			DateFormat dateFormat = new SimpleDateFormat(this.messageFormat.getDateFormat());
+			return dateFormat.format(new Date());
+		}
 		return "";
 	}
 	
@@ -23,14 +32,12 @@ public class MessageFormatApplier {
 		return "";
 	}
 	
-	private String getActualThread() {
-		//TODO: Deberia devolver el thread mas un separador
-		return "";
+	private String getCurrentThread() {
+		return Thread.currentThread().getName();
 	}
 	
 	private String getLineNumber() {
-		//TODO: Deberia devolver el numero de linea mas un separador
-		return "";
+		return String.valueOf(Thread.currentThread().getStackTrace()[2].getLineNumber());
 	}
 	
 	private String getFileName() {
@@ -41,5 +48,9 @@ public class MessageFormatApplier {
 	private String getMethodName() {
 		//TODO: Deberia devolver el nombre del metodo mas un separador
 		return "";
+	}
+	
+	private char getDelimiter() {
+		return this.delimiter;
 	}
 }

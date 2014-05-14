@@ -15,8 +15,8 @@ public class MessageFormatApplier {
 	}
 	
 	public String applyFormat(String message) {
-		return getDate() + getLevel() + getCurrentThread() + message + 
-				getLineNumber() + getFileName() + getMethodName();
+		return getDate() + getDelimiter() + getLevel() + getCurrentThread() + 
+				getMessage(message) + getLineNumber() + getFileName() + getMethodName();
 	}
 	
 	private String getDate() {
@@ -33,11 +33,13 @@ public class MessageFormatApplier {
 	}
 	
 	private String getCurrentThread() {
-		return Thread.currentThread().getName();
+		return this.messageFormat.threadIsVisible() ? 
+				Thread.currentThread().getName() : "";
 	}
 	
 	private String getLineNumber() {
-		return String.valueOf(Thread.currentThread().getStackTrace()[2].getLineNumber());
+		return this.messageFormat.lineNumberIsVisible() ? 
+				String.valueOf(Thread.currentThread().getStackTrace()[2].getLineNumber()) : "";
 	}
 	
 	private String getFileName() {
@@ -46,8 +48,12 @@ public class MessageFormatApplier {
 	}
 	
 	private String getMethodName() {
-		//TODO: Deberia devolver el nombre del metodo mas un separador
-		return "";
+		return this.messageFormat.methodNameIsVisible() ? 
+				Thread.currentThread().getStackTrace()[1].getMethodName() : "";
+	}
+	
+	private String getMessage(String message) {
+		return this.messageFormat.messageIsVisible() ? message : "";
 	}
 	
 	private char getDelimiter() {

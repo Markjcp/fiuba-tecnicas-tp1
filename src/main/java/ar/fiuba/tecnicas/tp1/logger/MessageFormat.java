@@ -25,6 +25,10 @@ public class MessageFormat {
 		return this.format.contains("%t") ? true : false;
 	}
 	
+	public boolean messageIsVisible() {
+		return this.format.contains("%m") ? true : false;
+	}
+	
 	public boolean msgIsVisible() {
 		return this.format.contains("%m") ? true : false;
 	}

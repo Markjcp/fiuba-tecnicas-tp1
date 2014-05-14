@@ -18,8 +18,11 @@ public class MessageFormat {
 	}
 	
 	public String getDateFormat() {
-		return this.format.contains("%d") ? 
-				this.format.elementAt(this.format.indexOf("%d")) : "";
+		if (this.format.contains("%d")) { 
+			String element = this.format.elementAt(this.format.indexOf("%d") + 1);
+			return element.substring(element.indexOf('{') + 1, element.indexOf('}'));
+		}
+		return "";
 	}
 	
 	public boolean levelIsVisible() {

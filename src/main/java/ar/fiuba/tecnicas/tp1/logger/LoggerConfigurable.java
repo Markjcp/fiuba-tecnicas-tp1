@@ -13,5 +13,13 @@ public interface LoggerConfigurable {
 	boolean isEnabled();
 	
 	List<LoggerAppender> getLoggerAppenders();
+	
+	String getFormat();
+	
+	void setFormat(String format);
+	
+	String getSeparator();
+	
+	void setSeparator(String separator);
 
 }

@@ -5,5 +5,9 @@ public interface LogMessage {
 	String getMessage();
 	
 	String getFormattedMessage();
+	
+	Level getLevel();
+	
+	String getLoggerName();
 
 }

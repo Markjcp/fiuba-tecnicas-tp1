@@ -7,10 +7,13 @@ import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 public class Logger {
 
 	private LoggerConfigurable configuration;
+	
+	private MessageFormatApplier messageFormatApplier;
 
 	public Logger(LoggerConfigurable configuration) {
 		super();
 		this.configuration = configuration;
+		this.messageFormatApplier= new MessageFormatApplier(configuration.getFormat(), configuration.getSeparator());
 	}
 
 	public static Logger getLogger(Class<?> aClass) {
@@ -22,7 +25,10 @@ public class Logger {
 	}
 
 	public void log(Level level, String message) {
-		log(level, new SimpleLogMessage(message));
+		log(level,
+				new SimpleLogMessage(message, messageFormatApplier.applyFormat(
+						message, level, LoggerManager.getInstance()
+								.getLoggerName(this))));
 	}
 
 	private boolean skipLogging(Level level) {

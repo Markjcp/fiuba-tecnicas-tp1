@@ -29,6 +29,16 @@ public class LoggerConfigurationBuilder {
 		}
 		return this;
 	}
+	
+	public LoggerConfigurationBuilder setFormat(String format){
+		configuration.setFormat(format);
+		return this;
+	}
+	
+	public LoggerConfigurationBuilder setSeparator(String separator){
+		configuration.setSeparator(separator);
+		return this;
+	}
 
 	public LoggerConfiguration build() {
 		return configuration;

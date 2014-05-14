@@ -12,6 +12,10 @@ public class LoggerConfiguration implements LoggerConfigurable {
 	private boolean enabled = true;
 
 	private List<LoggerAppender> appenders;
+	
+	private String format;
+	
+	private String separator;
 
 	public Level getLevel() {
 		return level;
@@ -38,6 +42,22 @@ public class LoggerConfiguration implements LoggerConfigurable {
 
 	public List<LoggerAppender> getLoggerAppenders() {
 		return appenders;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
+	}
+
+	public String getSeparator() {
+		return separator;
+	}
+
+	public void setSeparator(String separator) {
+		this.separator = separator;		
 	}
 
 }

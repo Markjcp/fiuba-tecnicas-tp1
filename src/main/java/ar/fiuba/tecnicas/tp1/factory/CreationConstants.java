@@ -11,5 +11,9 @@ public interface CreationConstants {
 	public static final String CONSOLE_APPENDER_KEY= "logger.appender.console";
 	
 	public static final String LEVEL_KEY = "logger.level";
+	
+	public static final String FORMAT_KEY = "logger.message.format";
+	
+	public static final String SEPARATOR_KEY = "logger.message.separator";
 
 }

@@ -35,6 +35,15 @@ public class LoggerManager {
 		}
 		return factory.createLogger();
 	}
+	
+	public String getLoggerName(Logger aLogger){
+		for (String loggerKey : loggers.keySet()) {
+			if(aLogger.equals(loggers.get(loggerKey))){
+				return loggerKey;
+			}
+		}
+		return null;
+	}
 
 	public void setFactory(LoggerFactory factory) {
 		this.factory = factory;

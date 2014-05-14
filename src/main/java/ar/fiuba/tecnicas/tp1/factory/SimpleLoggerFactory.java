@@ -19,18 +19,22 @@ public class SimpleLoggerFactory implements LoggerFactory {
 	public Logger createLogger() {
 		List<LoggerAppender> appenders = null;
 		Level level = null;
+		String format = "";
+		String separator = "";
 		try {
 			Properties properties = PropertyLoader
 					.loadProperties(CreationConstants.DEFAULT_CONFIGURATION_FILE);
 			appenders = loadAppendersFromProperties(properties);
 			level = Level.getLevelFromString((String) properties
 					.getProperty(CreationConstants.LEVEL_KEY));
+			format = properties.getProperty(CreationConstants.FORMAT_KEY);
+			separator = properties.getProperty(CreationConstants.SEPARATOR_KEY);
 		} catch (IOException e) {
 			throw new LoadConfigurationException();
 		}
 		Logger logger = new Logger(new LoggerConfigurationBuilder()
 				.setEnabled(true).setLevel(level).setAppenders(appenders)
-				.build());
+				.setFormat(format).setSeparator(separator).build());
 		return logger;
 	}
 

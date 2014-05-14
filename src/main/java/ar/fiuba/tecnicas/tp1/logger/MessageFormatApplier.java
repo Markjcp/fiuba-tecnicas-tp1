@@ -14,9 +14,9 @@ public class MessageFormatApplier {
 		this.messageFormat = new MessageFormat(format, delimiter);
 	}
 	
-	public String applyFormat(String message) {
-		return getDate() + getDelimiter() + getLevel() + getCurrentThread() + 
-				getMessage(message) + getLineNumber() + getFileName() + getMethodName();
+	public String applyFormat(String message, Level level, String loggerName) {
+		return getDate() + getDelimiter() + getLevel(level) + getCurrentThread() + 
+				getMessage(message) + getLineNumber() + getFileName(loggerName) + getMethodName();
 	}
 	
 	private String getDate() {
@@ -27,9 +27,8 @@ public class MessageFormatApplier {
 		return "";
 	}
 	
-	private String getLevel() {
-		//TODO: Deberia devolver el nivel mas un separador
-		return "";
+	private String getLevel(Level level) {
+		return this.messageFormat.levelIsVisible()?level.toString():"";
 	}
 	
 	private String getCurrentThread() {
@@ -42,9 +41,8 @@ public class MessageFormatApplier {
 				String.valueOf(Thread.currentThread().getStackTrace()[2].getLineNumber()) : "";
 	}
 	
-	private String getFileName() {
-		//TODO: Deberia devolver el nombre del archivo mas un separador
-		return "";
+	private String getFileName(String fileName) {
+		return this.messageFormat.fileNameIsVisible()?fileName:"";
 	}
 	
 	private String getMethodName() {

@@ -22,6 +22,7 @@ public final class Level implements Comparable<Level> {
 
 	static {
 		levels = new HashMap<String, Level>();
+		names = new HashMap<Integer, String>();
 		OFF = new Level(10000);
 		levels.put("OFF", OFF);
 		names.put(10000,"OFF");

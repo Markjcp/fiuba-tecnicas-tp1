@@ -6,10 +6,16 @@ import java.util.Vector;
 public class MessageFormat {
 	
 	private Vector<String> format;
+	// TODO: Deberia permitir levantarlo de properties
+	private char delimiter = '-';
 	
 	public MessageFormat(String format) {
 		//TODO: Deberia permitir mas separadores, lo levantaria de "properties"
 		this.format = new Vector<String>(Arrays.asList(format.split("-")));
+	}
+	
+	public char getDelimiter() {
+		return this.delimiter;
 	}
 	
 	public String getDateFormat() {

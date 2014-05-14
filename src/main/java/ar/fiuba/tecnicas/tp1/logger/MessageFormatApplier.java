@@ -7,8 +7,6 @@ import java.util.Date;
 public class MessageFormatApplier {
 	
 	private MessageFormat messageFormat;
-	// TODO: Deberia permitir levantarlo de properties
-	private char delimiter = '-';
 	
 	public MessageFormatApplier(String format) {
 		this.messageFormat = new MessageFormat(format);
@@ -57,6 +55,6 @@ public class MessageFormatApplier {
 	}
 	
 	private char getDelimiter() {
-		return this.delimiter;
+		return this.messageFormat.getDelimiter();
 	}
 }

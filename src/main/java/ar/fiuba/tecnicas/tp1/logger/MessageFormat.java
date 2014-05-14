@@ -34,10 +34,6 @@ public class MessageFormat {
 		return this.format.contains("%m") ? true : false;
 	}
 	
-	public boolean msgIsVisible() {
-		return this.format.contains("%m") ? true : false;
-	}
-	
 	public boolean delimiterIsVisible() {
 		return this.format.contains("%n") ? true : false;
 	}

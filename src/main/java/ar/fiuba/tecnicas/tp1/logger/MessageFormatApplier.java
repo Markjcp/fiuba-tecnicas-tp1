@@ -6,10 +6,12 @@ import java.util.Date;
 
 public class MessageFormatApplier {
 	
+	//TODO: Debe ser creado en el Factory
+	
 	private MessageFormat messageFormat;
 	
-	public MessageFormatApplier(String format) {
-		this.messageFormat = new MessageFormat(format);
+	public MessageFormatApplier(String format, String delimiter) {
+		this.messageFormat = new MessageFormat(format, delimiter);
 	}
 	
 	public String applyFormat(String message) {
@@ -54,7 +56,7 @@ public class MessageFormatApplier {
 		return this.messageFormat.messageIsVisible() ? message : "";
 	}
 	
-	private char getDelimiter() {
+	private String getDelimiter() {
 		return this.messageFormat.getDelimiter();
 	}
 }

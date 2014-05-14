@@ -6,15 +6,14 @@ import java.util.Vector;
 public class MessageFormat {
 	
 	private Vector<String> format;
-	// TODO: Deberia permitir levantarlo de properties
-	private char delimiter = '-';
+	private String delimiter;
 	
-	public MessageFormat(String format) {
-		//TODO: Deberia permitir mas separadores, lo levantaria de "properties"
-		this.format = new Vector<String>(Arrays.asList(format.split("-")));
+	public MessageFormat(String format, String delimiter) {
+		this.delimiter = delimiter;
+		this.format = new Vector<String>(Arrays.asList(format.split(delimiter)));
 	}
 	
-	public char getDelimiter() {
+	public String getDelimiter() {
 		return this.delimiter;
 	}
 	

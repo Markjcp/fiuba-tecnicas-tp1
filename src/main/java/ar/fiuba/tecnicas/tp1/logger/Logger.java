@@ -26,12 +26,12 @@ public class Logger {
 
 	public void log(Level level, String message) {
 		log(level,
-				new SimpleLogMessage(message, messageFormatApplier.applyFormat(
+				new SimpleLogMessage(message, messageFormatApplier.buildMessage(
 						message, level, LoggerManager.getInstance()
 								.getLoggerName(this))));
 	}
 
-	private boolean skipLogging(Level level) {
+	public boolean skipLogging(Level level) {
 		return !configuration.isEnabled()
 				|| level.compareTo(configuration.getLevel()) < 0;
 	}
@@ -77,5 +77,33 @@ public class Logger {
 	public void fatal(LogMessage message) {
 		log(Level.FATAL, message);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((configuration == null) ? 0 : configuration.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Logger other = (Logger) obj;
+		if (configuration == null) {
+			if (other.configuration != null)
+				return false;
+		} else if (!configuration.equals(other.configuration))
+			return false;
+		return true;
+	}
+	
+	
 
 }

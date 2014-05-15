@@ -1,25 +1,19 @@
 package ar.fiuba.tecnicas.tp1;
 
-import static org.junit.Assert.assertEquals;
-
-import java.text.SimpleDateFormat;
 
 import org.junit.Test;
 
 import ar.fiuba.tecnicas.tp1.logger.Level;
 import ar.fiuba.tecnicas.tp1.logger.Logger;
 
-import java.text.DateFormat;
-import java.util.Date;
-
+/**
+ * No son test unitarios, los utilizamos para probar que todo resulta de forma correcta
+ * @author marcos
+ *
+ */
 public class BaseProjectTest {
 	
 	private static Logger logger = Logger.getLogger(BaseProjectTest.class);
-	
-	@Test
-	public void testBaseConfiguration(){
-		assertEquals(true,true);
-	}
 	
 	@Test
 	public void testBaseLoggingInfo(){
@@ -39,11 +33,6 @@ public class BaseProjectTest {
 	@Test
 	public void testBaseLoggingFatal(){
 		logger.log(Level.FATAL, "Logueamos 4");
-	}
-	
-	@Test
-	public void testFormatoFecha() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		System.out.println(dateFormat.format(new Date()));
-	}
+	}	
+
 }

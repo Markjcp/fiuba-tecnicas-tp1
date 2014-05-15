@@ -15,5 +15,7 @@ public interface CreationConstants {
 	public static final String FORMAT_KEY = "logger.message.format";
 	
 	public static final String SEPARATOR_KEY = "logger.message.separator";
+	
+	public static final int NOT_FOUND_FORMAT_CODE = -1;
 
 }

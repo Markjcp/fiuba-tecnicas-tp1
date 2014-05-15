@@ -47,6 +47,11 @@ public class FileAppender implements LoggerAppender {
 
 	public void setAppenderName(String appenderName) {
 		this.appenderName = appenderName;
-	}	
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof FileAppender;
+	}
 
 }

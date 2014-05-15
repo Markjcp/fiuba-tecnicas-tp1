@@ -7,5 +7,10 @@ public class ConsoleAppender implements LoggerAppender{
 	public void doLog(LogMessage message) {
 		System.out.println(message.getFormattedMessage());		
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof ConsoleAppender;
+	}
 
 }

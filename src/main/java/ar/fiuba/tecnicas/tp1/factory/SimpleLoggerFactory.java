@@ -16,22 +16,28 @@ import ar.fiuba.tecnicas.tp1.logger.LoggerConfigurationBuilder;
 
 public class SimpleLoggerFactory implements LoggerFactory {
 
+	private Properties properties;
+
+	public SimpleLoggerFactory() {
+		try {
+			this.properties = PropertyLoader
+					.loadProperties(CreationConstants.DEFAULT_CONFIGURATION_FILE);
+		} catch (IOException e) {
+			throw new LoadConfigurationException();
+		}
+	}
+
 	public Logger createLogger() {
 		List<LoggerAppender> appenders = null;
 		Level level = null;
 		String format = "";
 		String separator = "";
-		try {
-			Properties properties = PropertyLoader
-					.loadProperties(CreationConstants.DEFAULT_CONFIGURATION_FILE);
-			appenders = loadAppendersFromProperties(properties);
-			level = Level.getLevelFromString((String) properties
-					.getProperty(CreationConstants.LEVEL_KEY));
-			format = properties.getProperty(CreationConstants.FORMAT_KEY);
-			separator = properties.getProperty(CreationConstants.SEPARATOR_KEY);
-		} catch (IOException e) {
-			throw new LoadConfigurationException();
-		}
+		appenders = loadAppendersFromProperties(properties);
+		level = Level.getLevelFromString((String) properties
+				.getProperty(CreationConstants.LEVEL_KEY));
+		format = properties.getProperty(CreationConstants.FORMAT_KEY);
+		separator = properties.getProperty(CreationConstants.SEPARATOR_KEY);
+
 		Logger logger = new Logger(new LoggerConfigurationBuilder()
 				.setEnabled(true).setLevel(level).setAppenders(appenders)
 				.setFormat(format).setSeparator(separator).build());
@@ -75,6 +81,10 @@ public class SimpleLoggerFactory implements LoggerFactory {
 			}
 		}
 		return result;
+	}
+	
+	public void setProperties(Properties properties){
+		this.properties = properties;
 	}
 
 }

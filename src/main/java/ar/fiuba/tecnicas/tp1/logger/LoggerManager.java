@@ -33,7 +33,9 @@ public class LoggerManager {
 		if(factory==null){
 			factory=new SimpleLoggerFactory();
 		}
-		return factory.createLogger();
+		Logger newLogger= factory.createLogger();
+		loggers.put(name, newLogger);
+		return newLogger;
 	}
 	
 	public String getLoggerName(Logger aLogger){
@@ -48,5 +50,9 @@ public class LoggerManager {
 	public void setFactory(LoggerFactory factory) {
 		this.factory = factory;
 	}	
+	
+	public boolean isLoggerRegistered(String name){
+		return loggers.get(name)!=null;
+	}
 
 }

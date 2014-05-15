@@ -1,5 +1,8 @@
 package ar.fiuba.tecnicas.tp1.factory;
 
+/**
+ * Constantes a utilizar en toda la api 
+ */
 public interface CreationConstants {
 
 	public static final String DEFAULT_CONFIGURATION_FILE = "log-config.properties";

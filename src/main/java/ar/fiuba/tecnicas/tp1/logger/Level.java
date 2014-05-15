@@ -3,6 +3,9 @@ package ar.fiuba.tecnicas.tp1.logger;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Representación del nivel de logging 
+ */
 public final class Level implements Comparable<Level> {
 	
 	public static final Level OFF;
@@ -20,6 +23,9 @@ public final class Level implements Comparable<Level> {
 	private static Map<String,Level> levels;
 	private static Map<Integer,String> names;
 
+	/**
+	 * Se carga de forma estática los niveles y los nombres
+	 */
 	static {
 		levels = new HashMap<String, Level>();
 		names = new HashMap<Integer, String>();
@@ -40,6 +46,10 @@ public final class Level implements Comparable<Level> {
 		names.put(4000, "FATAL");
 	}
 
+	/**
+	 * Contructor 
+	 * @param intLevel el peso que tendrá el nivel
+	 */
 	public Level(int intLevel) {
 		super();
 		this.intLevel = intLevel;
@@ -50,6 +60,11 @@ public final class Level implements Comparable<Level> {
 				: 0);
 	}
 	
+	/**
+	 * Conversión de Level a String
+	 * @param levelName nombre del nivel
+	 * @return el Level con ese nombre
+	 */
 	public static Level getLevelFromString(String levelName){
 		return levels.get(levelName);
 	}

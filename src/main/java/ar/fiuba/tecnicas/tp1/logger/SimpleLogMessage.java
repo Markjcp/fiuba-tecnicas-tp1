@@ -1,5 +1,8 @@
 package ar.fiuba.tecnicas.tp1.logger;
 
+/**
+ * Implementación básica de un registro de log
+ */
 public class SimpleLogMessage implements LogMessage{
 	
 	private String message;

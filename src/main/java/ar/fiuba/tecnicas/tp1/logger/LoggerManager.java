@@ -6,6 +6,10 @@ import java.util.Map;
 import ar.fiuba.tecnicas.tp1.factory.LoggerFactory;
 import ar.fiuba.tecnicas.tp1.factory.SimpleLoggerFactory;
 
+/**
+ * Encargado de admnistrar los loggers. Singleton 
+ *
+ */
 public class LoggerManager {
 	
 	private static LoggerManager instance;
@@ -25,6 +29,11 @@ public class LoggerManager {
 		return instance;
 	}
 	
+	/**
+	 * Devuelve y crea loggers
+	 * @param name nombre del logger a buscar o crear
+	 * @return el logger creado si no existia con esa clave o el existente
+	 */
 	public Logger getLogger(String name){
 		Logger result= loggers.get(name);
 		if(result!=null){
@@ -38,6 +47,11 @@ public class LoggerManager {
 		return newLogger;
 	}
 	
+	/**
+	 * Devuelve el nombre de un logger almacenado
+	 * @param aLogger logger a buscar
+	 * @return el nombre del logger
+	 */
 	public String getLoggerName(Logger aLogger){
 		for (String loggerKey : loggers.keySet()) {
 			if(aLogger.equals(loggers.get(loggerKey))){

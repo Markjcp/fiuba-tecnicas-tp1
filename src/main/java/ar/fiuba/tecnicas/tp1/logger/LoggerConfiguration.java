@@ -5,6 +5,9 @@ import java.util.List;
 
 import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 
+/**
+ * Implementación de la interfaz de configuración de Loggger en forma de beans 
+ */
 public class LoggerConfiguration implements LoggerConfigurable {
 
 	private Level level;

@@ -8,7 +8,6 @@ import ar.fiuba.tecnicas.tp1.logger.Logger;
 
 /**
  * No son test unitarios, los utilizamos para probar que todo resulta de forma correcta
- * @author marcos
  *
  */
 public class BaseProjectTest {

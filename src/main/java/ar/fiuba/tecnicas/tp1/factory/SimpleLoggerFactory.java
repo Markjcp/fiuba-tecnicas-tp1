@@ -14,6 +14,10 @@ import ar.fiuba.tecnicas.tp1.logger.Level;
 import ar.fiuba.tecnicas.tp1.logger.Logger;
 import ar.fiuba.tecnicas.tp1.logger.LoggerConfigurationBuilder;
 
+/**
+ * Implementación del LoggerFactory que toma un archivo properties y deja el logger configurad
+ *
+ */
 public class SimpleLoggerFactory implements LoggerFactory {
 
 	private Properties properties;
@@ -44,21 +48,42 @@ public class SimpleLoggerFactory implements LoggerFactory {
 		return logger;
 	}
 
+	/**
+	 * Valida si es una clave correcta para un appender de archivos
+	 * @param key la clave
+	 * @return verdadero si es correcta sino falso
+	 */
 	private boolean isValidFileAppenderKey(String key) {
 		return key.startsWith(CreationConstants.FILE_APPENDER_KEY)
 				&& key.length() > CreationConstants.FILE_APPENDER_KEY.length();
 
 	}
 
+	/**
+	 * Valida si es una clave correcta para un appender de consola
+	 * @param key la clave
+	 * @return verdadero si es correcta sino falso
+	 */
 	private boolean isValidConsoleAppenderKey(String key) {
 		return key.equals(CreationConstants.CONSOLE_APPENDER_KEY);
 
 	}
 
+	/**
+	 * Metodo utilitario que obtiene el nombre del file appender
+	 * @param prefix prefijo
+	 * @param entireKey clave entera
+	 * @return nombre del file appender
+	 */
 	private String cutAppenderName(String prefix, String entireKey) {
 		return entireKey.substring(prefix.length(), entireKey.length());
 	}
 
+	/**
+	 * Carga los appenders de un property
+	 * @param properties el property
+	 * @return la lista de appenders
+	 */
 	private List<LoggerAppender> loadAppendersFromProperties(
 			Properties properties) {
 		Set<Object> keys = properties.keySet();

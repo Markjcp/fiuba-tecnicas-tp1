@@ -4,6 +4,10 @@ import java.util.List;
 
 import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 
+/**
+ * Interfaz que define el comportamiento básico de una configuración de Logger
+ *
+ */
 public interface LoggerConfigurable {
 	
 	Level getLevel();

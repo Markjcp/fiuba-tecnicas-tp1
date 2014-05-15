@@ -4,6 +4,11 @@ import java.util.List;
 
 import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 
+/**
+ * Clase que construye un LoggerConfiguration
+ * @author marcos
+ *
+ */
 public class LoggerConfigurationBuilder {
 
 	private LoggerConfiguration configuration;
@@ -40,6 +45,10 @@ public class LoggerConfigurationBuilder {
 		return this;
 	}
 
+	/**
+	 * Método contructor
+	 * @return el objeto de configuración construido
+	 */
 	public LoggerConfiguration build() {
 		return configuration;
 	}

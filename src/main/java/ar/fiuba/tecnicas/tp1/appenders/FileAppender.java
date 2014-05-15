@@ -8,6 +8,10 @@ import java.io.IOException;
 import ar.fiuba.tecnicas.tp1.exceptions.AppendException;
 import ar.fiuba.tecnicas.tp1.logger.LogMessage;
 
+/**
+ * Appender para loguear por archivo
+ *
+ */
 public class FileAppender implements LoggerAppender {
 
 	private String fileName;
@@ -19,6 +23,9 @@ public class FileAppender implements LoggerAppender {
 		this.fileName = fileName;
 	}
 
+	/**
+	 * Método de la interfaz LoggerAppender que definimitavamente realiza el log
+	 */
 	public void doLog(LogMessage message) {
 		try {
 

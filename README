@@ -1,0 +1,55 @@
+TP1 - TÉCNICAS DE DISEÑO - LOGGER
+
+GRUPO N° 22
+- Marcos Forlenza (87237)
+- Belen Beltran (91718)
+- Fiona Gonzalez Lisella (91454)
+
+RESUMEN:
+La siguiente api presenta un cliente de trazas simple. En el presente documento se comentarán brevemente decisiones 
+de diseño, y casos particulares de resolución.
+
+DISEÑO: 
+Como parte de la investigación inicial del desarrollo se estudiaron los fuentes de dos loggers conocidos. 
+Por una parte log4j y también la implementación nativa de Java.
+También se observó el funcionamiento del Logger de Eclipse ADT al estar conectado a algún dispositivo.
+El estudio se tornó un poco complejo en cierto punto, pero sirvió simplemente para entender algunas abstracciones 
+útiles como el Appender y el LoggerManager.
+Luego, con estos ejemplos en mente, se procedió a diseñar el Logger presentado. En este diseño, se utilizaron (sin hacerlo de forma estricta) patrones vistos en clase como el Factory, Builder, Singleton.
+Básicamente los loggers se almacenan en un mapa y para obtener cada uno se utiliza un llamado estático (Logger.getLogger(“Clase”)) como se acostumbra a utilizar en todos los loggers conocidos. Estos loggers son administrados por una entidad llamada LoggerManager que está delegada en la clase principal Logger. Logger también tiene referencias a un objeto de configuración que encapsula las configuraciones cargadas de un archivo. Para realizar la creación se utilizaron dos objetos constructores un LoggerFactory y un MockFactory. El primero lee un archivo de configuración utilizando un objeto Properties y el segundo tiene datos fijos utilizados para las pruebas
+El formato de los mensajes se obtiene a partir de un String que se lee del archivo de Properties. Éste permite agregar varias opciones al mensaje original, como por ejemplo la fecha, el nivel, etc. Permite también realizar varias combinaciones entre las opciones elegidas. Un ejemplo de formato podría ser: “%d{HH:mm:ss} %p %t %m”.
+
+DIAGRAMA DE CLASES:
+Se adjunta en los fuentes un archivo con el diagrama de clases. El mismo se encuentra en el subdirectorio /doc.
+
+DECISIONES TOMADAS:
+Para configurar los appenders en el archivo properties se tomó la siguiente convención:
+- Cada File Appender tiene el siguiente formato: logger.appender.file.NOMBRE_APPENDER=RUTA ARCHIVO
+- Si se decide utilizar el Console Appender (loguear por consola) se ingresa la siguiente línea:
+logger.appender.console = true
+- Para indicar el separador a utilizar se utiliza la siguiente línea:
+logger.message.separator = “SIMBOLO”
+- Para utilizar un formato pre establecido se utiliza la siguiente forma:
+logger.message.format  = “FORMATO PREESTABLECIDO”
+
+Para formatear el mensaje se separada la línea del formato utilizando el separador configurado que no puede 
+ser los caracteres utilizados para el formateo, no pueden ser letras ni los signos %, {, } :
+El orden con que se escriba la línea será el orden del mensaje a trazar.
+Los códigos de formato son los siguientes:
+● %d{xxxxxxx} -->Cualquier formato válido de SimpleDateFormat.
+● %p --> Nivel del mensaje.
+● %t --> Nombre del thread actual.
+● %m --> Contenido del mensaje logueado por el usuario.
+default a elección.
+● %L --> Line number.
+● %F --> Filename.
+● %M --> Method name.
+
+En principio se habían pensado estos dos modificadores extra:
+● %% debería mostrar un % (es el escape de %).
+● %n debería mostrar el separador con el que el usuario configuró la herramienta o un
+default a elección.
+
+Pero se descartaron ya que la forma de formatear el mensajes es utilizando el separador configurado y dividiendo 
+todos en campos. Para próximas versiones se podría cambiar la funcionalidad y aceptar que el usuario pueda escribir 
+textos fijos e intercalar cada uno de los modificadores.

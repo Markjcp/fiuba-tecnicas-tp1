@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import ar.fiuba.tecnicas.tp1.factory.MockFactory;
 import ar.fiuba.tecnicas.tp1.logger.Level;
 import ar.fiuba.tecnicas.tp1.logger.Logger;
+import ar.fiuba.tecnicas.tp1.test.MockFactory;
 
 /**
  * Tests relacionados al Logging con distintas combinaciones de niveles 

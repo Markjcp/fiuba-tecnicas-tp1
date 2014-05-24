@@ -1,10 +1,11 @@
-package ar.fiuba.tecnicas.tp1.factory;
+package ar.fiuba.tecnicas.tp1.test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ar.fiuba.tecnicas.tp1.appenders.ConsoleAppender;
 import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
+import ar.fiuba.tecnicas.tp1.factory.LoggerFactory;
 import ar.fiuba.tecnicas.tp1.logger.Level;
 import ar.fiuba.tecnicas.tp1.logger.Logger;
 import ar.fiuba.tecnicas.tp1.logger.LoggerConfigurationBuilder;

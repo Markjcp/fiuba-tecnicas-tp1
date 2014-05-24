@@ -6,26 +6,48 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.fiuba.tecnicas.tp1.appenders.ConsoleAppender;
 import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
-import ar.fiuba.tecnicas.tp1.factory.MockFactory;
+import ar.fiuba.tecnicas.tp1.factory.LoggerFactory;
 import ar.fiuba.tecnicas.tp1.factory.SimpleLoggerFactory;
 import ar.fiuba.tecnicas.tp1.logger.Level;
 import ar.fiuba.tecnicas.tp1.logger.Logger;
 import ar.fiuba.tecnicas.tp1.logger.LoggerConfiguration;
 import ar.fiuba.tecnicas.tp1.logger.LoggerConfigurationBuilder;
 import ar.fiuba.tecnicas.tp1.logger.LoggerManager;
+import ar.fiuba.tecnicas.tp1.test.MockFactory;
 
 /**
  * Tests referentes a la creación de objetos utilizados en el desarrollo
- *
+ * 
  */
 public class CreationTests {
-	
+
+	private LoggerFactory mockFactory;
+
+	private LoggerFactory simpleFactory;
+
+	private Properties prop;
+
+	private LoggerConfigurationBuilder builder;
+
+	private List<LoggerAppender> appenders;
+
+	@Before
+	public void setup() {
+		mockFactory = new MockFactory();
+		simpleFactory = new SimpleLoggerFactory();
+		prop = new Properties();
+		builder = new LoggerConfigurationBuilder();
+		appenders = new ArrayList<LoggerAppender>();
+		appenders.add(new ConsoleAppender());
+	}
+
 	@Test
-	public void testSingletonManager(){
+	public void testSingletonManager() {
 		LoggerManager manager = LoggerManager.getInstance();
 		LoggerManager manager2 = LoggerManager.getInstance();
 		assertEquals(manager.equals(manager2), true);
@@ -34,7 +56,7 @@ public class CreationTests {
 	@Test
 	public void testManagerCreation() {
 		LoggerManager manager = LoggerManager.getInstance();
-		manager.setFactory(new MockFactory());
+		manager.setFactory(mockFactory);
 		Logger.getLogger(CreationTests.class);
 		assertEquals(manager.isLoggerRegistered(CreationTests.class.getName()),
 				true);
@@ -42,9 +64,7 @@ public class CreationTests {
 
 	@Test
 	public void testFactoryCreation() {
-		SimpleLoggerFactory factory1 = new SimpleLoggerFactory();
-		Logger logger1 = factory1.createLogger();
-		Properties prop = new Properties();
+		Logger logger1 = simpleFactory.createLogger();
 		prop.setProperty("logger.level", "INFO");
 		prop.setProperty("logger.appender.file.original",
 				"/home/marcos/log0.txt");
@@ -62,9 +82,6 @@ public class CreationTests {
 
 	@Test
 	public void testConfigurationBuilder() {
-		LoggerConfigurationBuilder builder = new LoggerConfigurationBuilder();
-		List<LoggerAppender> appenders = new ArrayList<LoggerAppender>();
-		appenders.add(new ConsoleAppender());
 		LoggerConfiguration conf1 = builder.setAppenders(appenders)
 				.setEnabled(true).setFormat("%m").setLevel(Level.INFO)
 				.setSeparator("-").build();

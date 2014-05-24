@@ -2,6 +2,7 @@ package ar.fiuba.tecnicas.tp1;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.fiuba.tecnicas.tp1.logger.Level;
@@ -11,11 +12,18 @@ import ar.fiuba.tecnicas.tp1.test.MockFactory;
 /**
  * Tests relacionados al Logging con distintas combinaciones de niveles 
  */
-public class LoggingTests {
+public class LoggingLevelTests {
+	
+	private MockFactory mockFactory;
+	
+	@Before
+	public void setup(){
+		mockFactory = new MockFactory();
+	}
+
 	
 	@Test
 	public void testLoggingInfoVsInfo(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.INFO);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.INFO),false);
@@ -23,7 +31,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingInfoVsWarn(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.INFO);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.WARN),false);
@@ -31,7 +38,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingInfoVsError(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.INFO);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.ERROR),false);
@@ -39,7 +45,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingInfoVsFatal(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.INFO);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.FATAL),false);
@@ -48,7 +53,6 @@ public class LoggingTests {
 	//Si se loguea algo con nivel OFF se mostraría
 	@Test
 	public void testLoggingInfoVsOff(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.INFO);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.OFF),false);
@@ -57,7 +61,6 @@ public class LoggingTests {
 	//
 	@Test
 	public void testLoggingWarnVsInfo(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.WARN);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.INFO),true);
@@ -65,7 +68,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingWarnVsWarn(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.WARN);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.WARN),false);
@@ -73,7 +75,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingWarnVsError(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.WARN);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.ERROR),false);
@@ -81,7 +82,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingWarnVsFatal(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.WARN);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.FATAL),false);
@@ -90,7 +90,6 @@ public class LoggingTests {
 	//Si se loguea algo con nivel OFF se mostraría
 	@Test
 	public void testLoggingWarnVsOff(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.WARN);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.OFF),false);
@@ -99,7 +98,6 @@ public class LoggingTests {
 	//
 	@Test
 	public void testLoggingErrorVsInfo(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.ERROR);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.INFO),true);
@@ -107,7 +105,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingErrorVsWarn(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.ERROR);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.WARN),true);
@@ -115,7 +112,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingErrorVsError(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.ERROR);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.ERROR),false);
@@ -123,7 +119,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingErrorVsFatal(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.ERROR);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.FATAL),false);
@@ -132,7 +127,6 @@ public class LoggingTests {
 	//Si se loguea algo con nivel OFF se mostraría
 	@Test
 	public void testLoggingErrorVsOff(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.ERROR);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.OFF),false);
@@ -149,7 +143,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingOffVsWarn(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.OFF);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.WARN),true);
@@ -165,7 +158,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingOffVsFatal(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.OFF);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.FATAL),true);
@@ -174,7 +166,6 @@ public class LoggingTests {
 	//Si se loguea algo con nivel OFF se mostraría
 	@Test
 	public void testLoggingOffVsOff(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.OFF);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.OFF),true);
@@ -182,7 +173,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingFatalVsInfo(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.FATAL);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.INFO),true);
@@ -198,7 +188,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingFatalVsError(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.FATAL);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.ERROR),true);
@@ -206,7 +195,6 @@ public class LoggingTests {
 	
 	@Test
 	public void testLoggingFatalVsFatal(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.FATAL);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.FATAL),false);
@@ -215,7 +203,6 @@ public class LoggingTests {
 	//Si se loguea algo con nivel OFF se mostraría
 	@Test
 	public void testLoggingFatalVsOff(){
-		MockFactory mockFactory = new MockFactory();
 		mockFactory.setLevel(Level.FATAL);
 		Logger logger = mockFactory.createLogger();
 		assertEquals(logger.skipLogging(Level.OFF),false);

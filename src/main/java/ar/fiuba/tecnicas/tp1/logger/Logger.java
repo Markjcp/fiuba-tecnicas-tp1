@@ -20,6 +20,10 @@ public class Logger {
 		this.messageFormatApplier= new MessageFormatApplier(configuration.getFormat(), configuration.getSeparator());
 	}
 	
+	public LoggerConfigurable getConfigurationCopy(){
+		return configuration.copy();
+	}
+	
 	/**
 	 * Obtiene de forma estática un logger 
 	 * @param aClass una clase

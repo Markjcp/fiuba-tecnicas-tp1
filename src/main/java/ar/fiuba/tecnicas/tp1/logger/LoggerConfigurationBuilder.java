@@ -21,6 +21,11 @@ public class LoggerConfigurationBuilder {
 		configuration.setLevel(level);
 		return this;
 	}
+	
+	public LoggerConfigurationBuilder(LoggerConfiguration configuration) {
+		super();
+		this.configuration = configuration;
+	}
 
 	public LoggerConfigurationBuilder setEnabled(boolean enabled) {
 		configuration.setEnabled(enabled);

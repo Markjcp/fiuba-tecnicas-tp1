@@ -12,12 +12,12 @@ import ar.fiuba.tecnicas.tp1.logger.LogMessage;
  * Appender para loguear por archivo
  *
  */
-public class FileAppender implements LoggerAppender {
+public class FileAppender extends AbstractAppender implements LoggerAppender {
 
 	private String fileName;
 	
 	private String appenderName;
-
+	
 	public FileAppender(String fileName) {
 		super();
 		this.fileName = fileName;
@@ -28,7 +28,6 @@ public class FileAppender implements LoggerAppender {
 	 */
 	public void doLog(LogMessage message) {
 		try {
-
 			File file = new File(fileName);
 
 			// if file doesnt exists, then create it
@@ -41,6 +40,7 @@ public class FileAppender implements LoggerAppender {
 			bw.write(message.getFormattedMessage());
 			bw.newLine();
 			bw.close();
+			super.setLogged(true);
 
 		} catch (IOException e) {
 			throw new AppendException("Error writing in file");
@@ -59,6 +59,10 @@ public class FileAppender implements LoggerAppender {
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof FileAppender;
+	}
+
+	public boolean hasLogged() {
+		return super.isLogged();
 	}
 
 }

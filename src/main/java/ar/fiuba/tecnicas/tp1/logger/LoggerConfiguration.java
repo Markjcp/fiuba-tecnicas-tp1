@@ -62,7 +62,18 @@ public class LoggerConfiguration implements LoggerConfigurable {
 	public void setSeparator(String separator) {
 		this.separator = separator;		
 	}
-
+	
+	public LoggerConfigurable copy() {
+		LoggerConfigurable result = new LoggerConfiguration();
+		result.setFormat(this.format);
+		result.setLevel(this.level);
+		result.setSeparator(this.separator);
+		for (LoggerAppender appender : this.appenders) {
+			result.addAppender(appender);
+		}
+		return result;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

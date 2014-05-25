@@ -8,7 +8,7 @@ import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
  * Interfaz que define el comportamiento básico de una configuración de Logger
  *
  */
-public interface LoggerConfigurable {
+public interface LoggerConfigurable{
 	
 	Level getLevel();
 	
@@ -25,5 +25,9 @@ public interface LoggerConfigurable {
 	String getSeparator();
 	
 	void setSeparator(String separator);
+	
+	public void addAppender(LoggerAppender appender);
+	
+	LoggerConfigurable copy();
 
 }

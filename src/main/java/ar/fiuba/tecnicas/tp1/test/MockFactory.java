@@ -3,7 +3,6 @@ package ar.fiuba.tecnicas.tp1.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.fiuba.tecnicas.tp1.appenders.ConsoleAppender;
 import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 import ar.fiuba.tecnicas.tp1.factory.LoggerFactory;
 import ar.fiuba.tecnicas.tp1.logger.Level;
@@ -23,7 +22,7 @@ public class MockFactory implements LoggerFactory {
 
 	public Logger createLogger() {
 		List<LoggerAppender> appenders = new ArrayList<LoggerAppender>();
-		appenders.add(new ConsoleAppender());
+		appenders.add(new MockAppender());
 		Logger logger = new Logger(new LoggerConfigurationBuilder()
 				.setEnabled(true).setLevel(level).setAppenders(appenders)
 				.setFormat("%m").setSeparator("-").build());

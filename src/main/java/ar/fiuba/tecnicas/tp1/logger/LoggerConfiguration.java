@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
+import ar.fiuba.tecnicas.tp1.util.AppendersEqualsHelper;
 
 /**
- * Implementación de la interfaz de configuración de Loggger en forma de beans 
+ * Implementación de la interfaz de configuración de Loggger en forma de beans
  */
 public class LoggerConfiguration implements LoggerConfigurable {
 
@@ -15,9 +16,9 @@ public class LoggerConfiguration implements LoggerConfigurable {
 	private boolean enabled = true;
 
 	private List<LoggerAppender> appenders;
-	
+
 	private String format;
-	
+
 	private String separator;
 
 	public Level getLevel() {
@@ -29,7 +30,7 @@ public class LoggerConfiguration implements LoggerConfigurable {
 	}
 
 	public boolean isEnabled() {
-		return enabled && (level!=null && !level.equals(Level.OFF));
+		return enabled && (level != null && !level.equals(Level.OFF));
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -60,9 +61,9 @@ public class LoggerConfiguration implements LoggerConfigurable {
 	}
 
 	public void setSeparator(String separator) {
-		this.separator = separator;		
+		this.separator = separator;
 	}
-	
+
 	public LoggerConfigurable copy() {
 		LoggerConfigurable result = new LoggerConfiguration();
 		result.setFormat(this.format);
@@ -73,7 +74,7 @@ public class LoggerConfiguration implements LoggerConfigurable {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,7 +101,8 @@ public class LoggerConfiguration implements LoggerConfigurable {
 		if (appenders == null) {
 			if (other.appenders != null)
 				return false;
-		} else if (appenders.size()!=other.appenders.size())
+		} else if (!AppendersEqualsHelper.areAppendersEqual(appenders,
+				other.appenders))
 			return false;
 		if (enabled != other.enabled)
 			return false;

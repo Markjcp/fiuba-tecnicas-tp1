@@ -58,22 +58,18 @@ public class MessageFormat {
 	/**
 	 * Comprueba si en el formato se especificó la fecha (es decir, contiene un %d) 
 	 * para ser mostrada en el mensaje de log
-	 * @return Si encuentra o no el formato de fecha
+	 * @return La posición de la fecha en la que deberia aparecer en el mensaje. 
 	 */
 	public int dateIsVisible() {
-		try {
-			int i = 0;
-			for (String current : format) {
-				if (current.startsWith("%d") && current.charAt(2) == '{'
-						&& current.charAt(current.length() - 1) == '}') {
-					return i;
-				}
-				i++;
+		int i = 0;
+		for (String current : format) {
+			if ((current.startsWith("%d{")) && 
+					(current.indexOf('}') == current.length() - 1)) {
+				return i;
 			}
-			return NOT_FOUND_FORMAT_CODE;
-		} catch (Exception e) {
-			return NOT_FOUND_FORMAT_CODE;
+			i++;
 		}
+		return NOT_FOUND_FORMAT_CODE;
 	}
 	
 	/**

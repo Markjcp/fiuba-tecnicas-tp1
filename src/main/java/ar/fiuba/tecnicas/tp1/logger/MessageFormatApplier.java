@@ -36,31 +36,31 @@ public class MessageFormatApplier {
 	public String buildMessage(String message, Level level, String loggerName){
 		int size = messageFormat.getModifiersSize();
 		String[] modifiers = new String[size];
-		int dateIndex = messageFormat.dateIsVisible();
+		int dateIndex = messageFormat.getDateIndexInFormat();
 		if( dateIndex != NOT_FOUND_FORMAT_CODE){
 			modifiers[dateIndex]= getDate();
 		}
-		int levelIndex = messageFormat.levelIsVisible();
+		int levelIndex = messageFormat.getlevelIndexInFormat();
 		if( levelIndex != NOT_FOUND_FORMAT_CODE){
 			modifiers[levelIndex]=getLevel(level);
 		}
-		int threadIndex = messageFormat.threadIsVisible();
+		int threadIndex = messageFormat.getThreadIndexInFormat();
 		if( threadIndex != NOT_FOUND_FORMAT_CODE){
 			modifiers[threadIndex]=getCurrentThread();
 		}
-		int messageIndex = messageFormat.messageIsVisible();
+		int messageIndex = messageFormat.getMessageIndexInFormat();
 		if( messageIndex != NOT_FOUND_FORMAT_CODE){
 			modifiers[messageIndex]=getMessage(message);
 		}
-		int lineNumberIndex = messageFormat.lineNumberIsVisible();
+		int lineNumberIndex = messageFormat.getLineNumberIndexInFormat();
 		if( lineNumberIndex != NOT_FOUND_FORMAT_CODE){
 			modifiers[lineNumberIndex]= getLineNumber();
 		}
-		int fileNameIndex = messageFormat.fileNameIsVisible();
+		int fileNameIndex = messageFormat.getFileNameIndexInFormat();
 		if( fileNameIndex != NOT_FOUND_FORMAT_CODE){
 			modifiers[fileNameIndex]=getFileName(loggerName);
 		}
-		int methodNameIndex = messageFormat.methodNameIsVisible();
+		int methodNameIndex = messageFormat.getMethodNameIndexInFormat();
 		if (methodNameIndex != NOT_FOUND_FORMAT_CODE){
 			modifiers[methodNameIndex]= getMethodName();
 		}
@@ -79,15 +79,13 @@ public class MessageFormatApplier {
 	
 	/**
 	 * Método que devuelve la fecha según el formato que obtuvo el MessageFormat.
-	 * Si no se especificó la fecha en el formato, entonces se devuelve un string vacío.
-	 * @return fecha formateada si corresponde.
+	 * Si no se especificó el formato de la fecha en el formato, entonces se utiliza un
+	 * formato default.
+	 * @return fecha formateada.
 	 */
 	private String getDate() {
-		if (!this.messageFormat.getDateFormat().isEmpty()) {
-			DateFormat dateFormat = new SimpleDateFormat(this.messageFormat.getDateFormat());
-			return dateFormat.format(new Date());
-		}
-		return "";
+		DateFormat dateFormat = new SimpleDateFormat(this.messageFormat.getDateFormat());
+		return dateFormat.format(new Date());
 	}
 	
 	/**
@@ -97,7 +95,7 @@ public class MessageFormatApplier {
 	 * @return nivel del mensaje si corresponde
 	 */
 	private String getLevel(Level level) {
-		return this.messageFormat.levelIsVisible()!=NOT_FOUND_FORMAT_CODE?level.toString():"";
+		return level.toString();
 	}
 	
 	/**
@@ -106,8 +104,7 @@ public class MessageFormatApplier {
 	 * @return thread actual de donde se está loggeando si corresponde
 	 */
 	private String getCurrentThread() {
-		return this.messageFormat.threadIsVisible()!=NOT_FOUND_FORMAT_CODE ? 
-				Thread.currentThread().getName() : "";
+		return Thread.currentThread().getName();
 	}
 	
 	/**
@@ -116,8 +113,7 @@ public class MessageFormatApplier {
 	 * @return número de linea actual si corersponde
 	 */
 	private String getLineNumber() {
-		return this.messageFormat.lineNumberIsVisible()!=NOT_FOUND_FORMAT_CODE ? 
-				String.valueOf(Thread.currentThread().getStackTrace()[4].getLineNumber()) : "";
+		return String.valueOf(Thread.currentThread().getStackTrace()[4].getLineNumber());
 	}
 	
 	/**
@@ -128,7 +124,7 @@ public class MessageFormatApplier {
 	 * @return nombre del archivo si corresponde
 	 */
 	private String getFileName(String fileName) {
-		return this.messageFormat.fileNameIsVisible()!=NOT_FOUND_FORMAT_CODE?fileName:"";
+		return fileName;
 	}
 	
 	/**
@@ -138,8 +134,7 @@ public class MessageFormatApplier {
 	 * @return nombre del método si corresponde
 	 */
 	private String getMethodName() {
-		return this.messageFormat.methodNameIsVisible()!=NOT_FOUND_FORMAT_CODE ? 
-				Thread.currentThread().getStackTrace()[4].getMethodName() : "";
+		return Thread.currentThread().getStackTrace()[4].getMethodName();
 	}
 	
 	/**
@@ -149,7 +144,7 @@ public class MessageFormatApplier {
 	 * @return mensaje ingresado por el usuario si corresponde
 	 */
 	private String getMessage(String message) {
-		return this.messageFormat.messageIsVisible()!=NOT_FOUND_FORMAT_CODE ? message : "";
+		return message;
 	}
 	
 	/**

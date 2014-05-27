@@ -6,14 +6,27 @@ import java.util.Vector;
 import static ar.fiuba.tecnicas.tp1.factory.CreationConstants.*;
 
 /**
- * Esta clase se encarga de parsear el formato a partir de un string.
- * Puede definirse un separador para delimitar los diferentes formatos armados.
+ * Esta clase se encarga de parsear el formato de los mensajes a partir de un string.
+ * Puede definirse un separador para delimitar los diferentes formatos armados o se utiliza
+ * un default.
  *
  */
 public class MessageFormat {
 	
 	private Vector<String> format;
 	private String delimiter;
+	
+	/**
+	 * Método que recibe un modifier pasado por parámetros (%p, %d, ..) y devuelve
+	 * la posición donde se encuentra.
+	 * @param modifier
+	 * @return la posición donde se encuentra modifier en el formato o 
+	 * NOT_FOUND_FORMAT_CODE si no lo encuentra. 
+	 */
+	private int getIndexInFormat(String modifier) {
+		return this.format.contains(modifier) ? this.format.indexOf(modifier) : 
+			NOT_FOUND_FORMAT_CODE;
+	}
 	
 	/** Crea un MessageFormat a partir de un string y un delimitador.
 	 * Para el formato del dia se aceptan los mismos que para SimpleDateFormat.
@@ -44,10 +57,10 @@ public class MessageFormat {
 	
 	/**
 	 * Método que obtiene el formato de fecha seleccionado en el archivo de propiedades.
-	 * @return Formato de la fecha.
+	 * @return Formato de la fecha o vacío si no existe.
 	 */
 	public String getDateFormat() {
-		int resultFoundCode = dateIsVisible();
+		int resultFoundCode = getDateIndexInFormat();
 		if(resultFoundCode!=NOT_FOUND_FORMAT_CODE){
 			String element = this.format.elementAt(resultFoundCode);
 			return element.substring(element.indexOf('{') + 1, element.indexOf('}'));
@@ -60,7 +73,7 @@ public class MessageFormat {
 	 * para ser mostrada en el mensaje de log
 	 * @return La posición de la fecha en la que deberia aparecer en el mensaje. 
 	 */
-	public int dateIsVisible() {
+	public int getDateIndexInFormat() {
 		int i = 0;
 		for (String current : format) {
 			if ((current.startsWith("%d{")) && 
@@ -75,64 +88,55 @@ public class MessageFormat {
 	/**
 	 * Comprueba si en el formato se especificó el nivel (es decir, contiene un %p) 
 	 * para ser mostrada en el mensaje de log
-	 * @return Si encuentra o no el formato de nivel
+	 * @return La posición en el formato del nivel o NOT_FOUND_FORMAT_CODE sino.
 	 */
-	public int levelIsVisible() {
-		return this.format.contains("%p") ? this.format.indexOf("%p") : NOT_FOUND_FORMAT_CODE;
+	public int getlevelIndexInFormat() {
+		return getIndexInFormat("%p");
 	}
 	
 	/**
 	 * Comprueba si en el formato se especificó el thread (es decir, contiene un %t) 
 	 * para ser mostrada en el mensaje de log
-	 * @return Si encuentra o no el formato de thread
+	 * @return La posición en el formato del thread o NOT_FOUND_FORMAT_CODE sino.
 	 */
-	public int threadIsVisible() {
-		return this.format.contains("%t") ? this.format.indexOf("%t") : NOT_FOUND_FORMAT_CODE;
+	public int getThreadIndexInFormat() {
+		return getIndexInFormat("%t");
 	}
 	
 	/**
 	 * Comprueba si en el formato se especificó el mensaje (es decir, contiene un %m) 
 	 * para ser mostrada en el mensaje de log
-	 * @return Si encuentra o no el formato de mensaje
+	 * @return La posición en el formato del mensaje o NOT_FOUND_FORMAT_CODE sino.
 	 */
-	public int messageIsVisible() {
-		return this.format.contains("%m") ? this.format.indexOf("%m") : NOT_FOUND_FORMAT_CODE;
-	}
-	
-	/**
-	 * Comprueba si en el formato se especificó el delimitador (es decir, contiene un %n) 
-	 * para ser mostrada en el mensaje de log
-	 * @return Si encuentra o no el formato de delimitador
-	 */
-	public int delimiterIsVisible() {
-		return this.format.contains("%n") ? this.format.indexOf("%n") : NOT_FOUND_FORMAT_CODE;
+	public int getMessageIndexInFormat() {
+		return getIndexInFormat("%m");
 	}
 	
 	/**
 	 * Comprueba si en el formato se especificó el numero de linea 
 	 * (es decir, contiene un %L) para ser mostrada en el mensaje de log
-	 * @return Si encuentra o no el formato de numero de linea
+	 * @return La posición en el formato del número de línea o NOT_FOUND_FORMAT_CODE.
 	 */
-	public int lineNumberIsVisible() {
-		return this.format.contains("%L") ? this.format.indexOf("%L") : NOT_FOUND_FORMAT_CODE;
+	public int getLineNumberIndexInFormat() {
+		return getIndexInFormat("%L");
 	}
 	
 	/**
 	 * Comprueba si en el formato se especificó el nombre del archivo 
 	 * (es decir, contiene un %F) para ser mostrada en el mensaje de log
-	 * @return Si encuentra o no el formato de nombre de archivo
+	 * @return La posición en el formato del nombre del archivo o NOT_FOUND_FORMAT_CODE
 	 */
-	public int fileNameIsVisible() {
-		return this.format.contains("%F") ? this.format.indexOf("%F") : NOT_FOUND_FORMAT_CODE;
+	public int getFileNameIndexInFormat() {
+		return getIndexInFormat("%F");
 	}
 	
 	/**
-	 * Comprueba si en el formato se especificó el nombre del metodo 
+	 * Comprueba si en el formato se especificó el nombre del método 
 	 * (es decir, contiene un %M) para ser mostrada en el mensaje de log
-	 * @return Si encuentra o no el formato de nombre de metodo
+	 * @return La posición en el formatl del nombre del método o NOT_FOUND_FORMAT_CODE
 	 */
-	public int methodNameIsVisible() {
-		return this.format.contains("%M") ? this.format.indexOf("%M") : NOT_FOUND_FORMAT_CODE;
+	public int getMethodNameIndexInFormat() {
+		return getIndexInFormat("%M");
 	}
 	
 }

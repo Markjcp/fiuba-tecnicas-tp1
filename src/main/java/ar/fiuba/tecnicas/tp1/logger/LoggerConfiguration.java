@@ -21,6 +21,10 @@ public class LoggerConfiguration implements LoggerConfigurable {
 
 	private String separator;
 
+	public LoggerConfiguration() {
+		appenders = new ArrayList<LoggerAppender>();
+	}
+
 	public Level getLevel() {
 		return level;
 	}
@@ -38,9 +42,6 @@ public class LoggerConfiguration implements LoggerConfigurable {
 	}
 
 	public void addAppender(LoggerAppender appender) {
-		if (appenders == null) {
-			appenders = new ArrayList<LoggerAppender>();
-		}
 		appenders.add(appender);
 	}
 

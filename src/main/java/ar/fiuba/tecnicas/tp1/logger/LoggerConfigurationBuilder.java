@@ -6,8 +6,6 @@ import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 
 /**
  * Clase que construye un LoggerConfiguration
- * @author marcos
- *
  */
 public class LoggerConfigurationBuilder {
 

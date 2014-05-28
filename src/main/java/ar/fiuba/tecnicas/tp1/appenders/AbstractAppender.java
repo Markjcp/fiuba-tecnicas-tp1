@@ -1,9 +1,17 @@
 package ar.fiuba.tecnicas.tp1.appenders;
 
+/**
+ * Clase padre para reunir funcionalidad común a todos los appenders
+ * Se incluye para testear en principio
+ */
 public abstract class AbstractAppender {
 
 	private boolean logged = false;
 
+	/**
+	 * Comprueba si se utilizó esta instancia para loguear alguna vez
+	 * @return verdadero si se utilizó, falso en caso contrario
+	 */
 	public boolean isLogged() {
 		return logged;
 	}

@@ -1,10 +1,10 @@
 package ar.fiuba.tecnicas.tp1.logger;
 
-import static ar.fiuba.tecnicas.tp1.factory.CreationConstants.NOT_FOUND_FORMAT_CODE;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import ar.fiuba.tecnicas.tp1.exceptions.FormatNotFoundException;
 
 /**
  * Esta clase se encarga de aplicar el formato que obtiene de MessageFormat a un 
@@ -36,34 +36,41 @@ public class MessageFormatApplier {
 	public String buildMessage(String message, Level level, String loggerName){
 		int size = messageFormat.getModifiersSize();
 		String[] modifiers = new String[size];
-		int dateIndex = messageFormat.getDateIndexInFormat();
-		if( dateIndex != NOT_FOUND_FORMAT_CODE){
+		try {
+			int dateIndex = messageFormat.getDateIndexInFormat();
 			modifiers[dateIndex]= getDate();
-		}
-		int levelIndex = messageFormat.getlevelIndexInFormat();
-		if( levelIndex != NOT_FOUND_FORMAT_CODE){
+		} catch (FormatNotFoundException unimportant) {}
+		
+		try {
+			int levelIndex = messageFormat.getlevelIndexInFormat();
 			modifiers[levelIndex]=getLevel(level);
-		}
-		int threadIndex = messageFormat.getThreadIndexInFormat();
-		if( threadIndex != NOT_FOUND_FORMAT_CODE){
+		} catch (FormatNotFoundException unimportant) {}
+		
+		try {
+			int threadIndex = messageFormat.getThreadIndexInFormat();
 			modifiers[threadIndex]=getCurrentThread();
-		}
-		int messageIndex = messageFormat.getMessageIndexInFormat();
-		if( messageIndex != NOT_FOUND_FORMAT_CODE){
+		} catch (FormatNotFoundException unimportant) {}
+		
+		try {
+			int messageIndex = messageFormat.getMessageIndexInFormat();
 			modifiers[messageIndex]=getMessage(message);
-		}
-		int lineNumberIndex = messageFormat.getLineNumberIndexInFormat();
-		if( lineNumberIndex != NOT_FOUND_FORMAT_CODE){
+		} catch (FormatNotFoundException unimportant) {}
+		
+		try {
+			int lineNumberIndex = messageFormat.getLineNumberIndexInFormat();
 			modifiers[lineNumberIndex]= getLineNumber();
-		}
-		int fileNameIndex = messageFormat.getFileNameIndexInFormat();
-		if( fileNameIndex != NOT_FOUND_FORMAT_CODE){
+		} catch (FormatNotFoundException unimportant) {}
+		
+		try {
+			int fileNameIndex = messageFormat.getFileNameIndexInFormat();
 			modifiers[fileNameIndex]=getFileName(loggerName);
-		}
-		int methodNameIndex = messageFormat.getMethodNameIndexInFormat();
-		if (methodNameIndex != NOT_FOUND_FORMAT_CODE){
+		} catch (FormatNotFoundException unimportant) {}
+		
+		try {
+			int methodNameIndex = messageFormat.getMethodNameIndexInFormat();
 			modifiers[methodNameIndex]= getMethodName();
-		}
+		} catch (FormatNotFoundException unimportant) {}
+		
 		String result="";
 		for (String modifier : modifiers) {
 			if(!modifier.isEmpty()){

@@ -3,7 +3,7 @@ package ar.fiuba.tecnicas.tp1.logger;
 import java.util.Arrays;
 import java.util.Vector;
 
-import static ar.fiuba.tecnicas.tp1.factory.CreationConstants.*;
+import ar.fiuba.tecnicas.tp1.exceptions.FormatNotFoundException;
 
 /**
  * Esta clase se encarga de parsear el formato de los mensajes a partir de un string.
@@ -18,14 +18,15 @@ public class MessageFormat {
 	
 	/**
 	 * Método que recibe un modifier pasado por parámetros (%p, %d, ..) y devuelve
-	 * la posición donde se encuentra.
+	 * la posición donde se encuentra. Si no lo encuentra lanza una excepción unchecked
 	 * @param modifier
-	 * @return la posición donde se encuentra modifier en el formato o 
-	 * NOT_FOUND_FORMAT_CODE si no lo encuentra. 
+	 * @return la posición donde se encuentra modifier en el formato 
 	 */
 	private int getIndexInFormat(String modifier) {
-		return this.format.contains(modifier) ? this.format.indexOf(modifier) : 
-			NOT_FOUND_FORMAT_CODE;
+		if(this.format.contains(modifier)){
+			return this.format.indexOf(modifier);
+		}
+		throw new FormatNotFoundException();		
 	}
 	
 	/** Crea un MessageFormat a partir de un string y un delimitador.
@@ -60,17 +61,18 @@ public class MessageFormat {
 	 * @return Formato de la fecha o vacío si no existe.
 	 */
 	public String getDateFormat() {
-		int resultFoundCode = getDateIndexInFormat();
-		if(resultFoundCode!=NOT_FOUND_FORMAT_CODE){
+		try {
+			int resultFoundCode = getDateIndexInFormat();
 			String element = this.format.elementAt(resultFoundCode);
 			return element.substring(element.indexOf('{') + 1, element.indexOf('}'));
-		}
-		return "";
+		} catch (FormatNotFoundException e) {
+			return "";
+		}		
 	}
 	
 	/**
 	 * Comprueba si en el formato se especificó la fecha (es decir, contiene un %d) 
-	 * para ser mostrada en el mensaje de log
+	 * para ser mostrada en el mensaje de log. Si no lo encuentra lanza una excepción unchecked
 	 * @return La posición de la fecha en la que deberia aparecer en el mensaje. 
 	 */
 	public int getDateIndexInFormat() {
@@ -82,7 +84,7 @@ public class MessageFormat {
 			}
 			i++;
 		}
-		return NOT_FOUND_FORMAT_CODE;
+		throw new FormatNotFoundException();
 	}
 	
 	/**

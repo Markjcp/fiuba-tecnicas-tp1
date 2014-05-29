@@ -17,7 +17,8 @@ public class Logger {
 	public Logger(LoggerConfigurable configuration) {
 		super();
 		this.configuration = configuration;
-		this.messageFormatApplier= new MessageFormatApplier(configuration.getFormat(), configuration.getSeparator());
+		//this.messageFormatApplier= new MessageFormatApplier(configuration.getFormat(), configuration.getSeparator());
+		this.messageFormatApplier = new MessageFormatApplier(configuration.getFormat());
 	}
 	
 	public LoggerConfigurable getConfigurationCopy(){

@@ -18,8 +18,10 @@ public class LoggerConfiguration implements LoggerConfigurable {
 	private List<LoggerAppender> appenders;
 
 	private String format;
+	
+	private MessageFormat messageFormat;
 
-	private String separator;
+	private String separator = "-";
 
 	public LoggerConfiguration() {
 		appenders = new ArrayList<LoggerAppender>();
@@ -49,14 +51,22 @@ public class LoggerConfiguration implements LoggerConfigurable {
 		return appenders;
 	}
 
-	public String getFormat() {
+	/*public String getFormat() {
 		return format;
+	}*/
+	
+	public MessageFormat getFormat() {
+		return messageFormat;
 	}
 
 	public void setFormat(String format) {
 		this.format = format;
+		this.messageFormat = new MessageFormat(format, separator);
 	}
-
+	
+	public void setFormat(MessageFormat format){
+		this.messageFormat = format;
+	}
 	public String getSeparator() {
 		return separator;
 	}

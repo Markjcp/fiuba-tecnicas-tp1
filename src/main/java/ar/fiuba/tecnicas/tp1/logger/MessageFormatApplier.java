@@ -26,6 +26,14 @@ public class MessageFormatApplier {
 	}
 	
 	/**
+	 * Constructor que a partir de un MessageFormat devuelve un
+	 * MessageFormatApplier
+	 */
+	public MessageFormatApplier(MessageFormat format) {
+		this.messageFormat = format;
+	}
+	
+	/**
 	 * Método que devuelve el mensaje formateado según el formato especificado en 
 	 * el archivo de propiedades.
 	 * @param message

@@ -18,7 +18,7 @@ public interface LoggerConfigurable{
 	
 	List<LoggerAppender> getLoggerAppenders();
 	
-	String getFormat();
+	MessageFormat getFormat();
 	
 	void setFormat(String format);
 	

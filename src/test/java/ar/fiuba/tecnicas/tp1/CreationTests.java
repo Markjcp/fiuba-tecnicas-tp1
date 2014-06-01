@@ -44,6 +44,18 @@ public class CreationTests {
 		builder = new LoggerConfigurationBuilder();
 		appenders = new ArrayList<LoggerAppender>();
 		appenders.add(new ConsoleAppender());
+		prop.setProperty("logger.level", "INFO");
+		prop.setProperty("logger.appender.file.original",
+				"/home/marcos/log0.txt");
+		prop.setProperty("logger.appender.file.bench ", "/home/marcos/log1.txt");
+		prop.setProperty("logger.appender.file.third ", "/home/marcos/log2.txt");
+		prop.setProperty("logger.appender.console", "true");
+		prop.setProperty("logger.appender.custom.custom1.class", "ar.fiuba.tecnicas.tp1.appenders.SimpleCustomAppender");
+		prop.setProperty("logger.appender.custom.custom1.param1", "Custom Appender Info:");
+		prop.setProperty("logger.appender.custom.custom1.param2", "Unimportant");
+		prop.setProperty("logger.message.format",
+				"%m-%d{HH:mm:ss}-%t-%p-%L-%F-%M");
+		prop.setProperty("logger.message.separator", "-");
 	}
 
 	@Test
@@ -65,15 +77,6 @@ public class CreationTests {
 	@Test
 	public void testFactoryCreation() {
 		Logger logger1 = simpleFactory.createLogger();
-		prop.setProperty("logger.level", "INFO");
-		prop.setProperty("logger.appender.file.original",
-				"/home/marcos/log0.txt");
-		prop.setProperty("logger.appender.file.bench ", "/home/marcos/log1.txt");
-		prop.setProperty("logger.appender.file.third ", "/home/marcos/log2.txt");
-		prop.setProperty("logger.appender.console", "true");
-		prop.setProperty("logger.message.format",
-				"%m-%d{HH:mm:ss}-%t-%p-%L-%F-%M");
-		prop.setProperty("logger.message.separator", "-");
 		SimpleLoggerFactory factory2 = new SimpleLoggerFactory();
 		factory2.setProperties(prop);
 		Logger logger2 = factory2.createLogger();

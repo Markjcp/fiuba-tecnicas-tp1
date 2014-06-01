@@ -12,6 +12,8 @@ import ar.fiuba.tecnicas.tp1.factory.SimpleLoggerFactory;
  */
 public class LoggerManager {
 	
+	private static final String ANONYMOUS_LOGGER_NAME="Logger not registered";
+	
 	private static LoggerManager instance;
 	
 	private LoggerFactory factory;
@@ -58,7 +60,7 @@ public class LoggerManager {
 				return loggerKey;
 			}
 		}
-		return null;
+		return ANONYMOUS_LOGGER_NAME;
 	}
 
 	public void setFactory(LoggerFactory factory) {

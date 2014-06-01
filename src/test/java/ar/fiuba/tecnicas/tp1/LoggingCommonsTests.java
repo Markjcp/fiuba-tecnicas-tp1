@@ -1,13 +1,11 @@
 package ar.fiuba.tecnicas.tp1;
 
 import static org.junit.Assert.assertEquals;
-
-import java.util.List;
+import static ar.fiuba.tecnicas.tp1.TestUtils.hasAppend;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 import ar.fiuba.tecnicas.tp1.logger.Level;
 import ar.fiuba.tecnicas.tp1.logger.Logger;
 import ar.fiuba.tecnicas.tp1.test.MockFactory;
@@ -38,14 +36,4 @@ public class LoggingCommonsTests {
 		logger.log(Level.INFO, "mustLoggingTest");
 		assertEquals(hasAppend(logger.getConfigurationCopy().getLoggerAppenders()),false);
 	}
-	
-	private boolean hasAppend(List<LoggerAppender> appenders){
-		for (LoggerAppender loggerAppender : appenders) {
-			if(loggerAppender.hasLogged()){
-				return true;
-			}
-		}
-		return false;
-	}
-
 }

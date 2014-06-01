@@ -9,6 +9,10 @@ import java.util.Map;
 public final class Level implements Comparable<Level> {
 	
 	public static final Level OFF;
+	
+	public static final Level TRACE;
+	
+	public static final Level DEBUG;
 
 	public static final Level INFO;
 
@@ -32,6 +36,10 @@ public final class Level implements Comparable<Level> {
 		OFF = new Level(10000);
 		levels.put("OFF", OFF);
 		names.put(10000,"OFF");
+		TRACE = new Level(500);
+		levels.put("TRACE", TRACE);
+		DEBUG = new Level(750);
+		levels.put("DEBUG", DEBUG);
 		INFO = new Level(1000);
 		levels.put("INFO", INFO);
 		names.put(1000, "INFO");

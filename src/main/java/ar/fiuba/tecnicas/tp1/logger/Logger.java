@@ -51,8 +51,19 @@ public class Logger {
 	public void log(Level level, String message) {
 		log(level,
 				new SimpleLogMessage(message, messageFormatApplier.buildMessage(
-						message, level, LoggerManager.getInstance()
-								.getLoggerName(this))));
+						message, level, getLoggerName())));
+	}
+	
+	/**
+	 * Método para loguear cierto mensaje 
+	 * @param level el nivel del mensaje a loguear
+	 * @param message el mensaje a loguear
+	 * @param t el throwable de donde se tomara la descripción
+	 */
+	public void log(Level level, String message, Throwable t){
+		log(level,
+				new SimpleLogMessage(message + " " + t.getMessage(), messageFormatApplier.buildMessage(
+						message, level, getLoggerName())));
 	}
 
 	/**
@@ -80,7 +91,24 @@ public class Logger {
 		}
 	}
 	
+	/**
+	 * Retrieve logger name
+	 * @return the logger name
+	 */
+	public String getLoggerName(){
+		return LoggerManager.getInstance()
+		.getLoggerName(this);
+	}
+	
 	/* Métodos para cada nivel de log*/
+	
+	public void trace(String message){
+		log(Level.TRACE, message);
+	}
+	
+	public void debug(String message){
+		log(Level.DEBUG,message);
+	}
 
 	public void info(String message) {
 		log(Level.INFO, message);

@@ -17,7 +17,6 @@ public class Logger {
 	public Logger(LoggerConfigurable configuration) {
 		super();
 		this.configuration = configuration;
-		//this.messageFormatApplier= new MessageFormatApplier(configuration.getFormat(), configuration.getSeparator());
 		this.messageFormatApplier = new MessageFormatApplier(configuration.getFormat());
 	}
 	
@@ -51,6 +50,20 @@ public class Logger {
 	public void log(Level level, String message) {
 		log(level,
 				new SimpleLogMessage(message, messageFormatApplier.buildMessage(
+						message, level, getLoggerName())));
+	}
+	
+	/**
+	 * Método para loguear cierto mensaje con otro formato
+	 * @param level el nivel del mensaje a loguear
+	 * @param message el mensaje a loguear
+	 * @param format el nuevo formato
+	 */
+	public void log(Level level, String message, String format) {
+		MessageFormat anotherFormat = new MessageFormat(format, this.configuration.getSeparator());
+		MessageFormatApplier anotherApplier = new MessageFormatApplier(anotherFormat);
+		log(level,
+				new SimpleLogMessage(message, anotherApplier.buildMessage(
 						message, level, getLoggerName())));
 	}
 	

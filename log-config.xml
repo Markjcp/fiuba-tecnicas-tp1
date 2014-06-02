@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+	<level>INFO</level>
+	<separator>-</separator>
+	<format>%m-%d{HH:mm:ss}-%t-%p-%L-%F-%M</format>
+	<console>true</console>
+	<fileAppender>
+		<fileName>/home/marcos/log0.txt</fileName>
+	</fileAppender>
+	<fileAppender>
+		<fileName>/home/marcos/log1.txt</fileName>
+	</fileAppender>
+	<fileAppender>
+		<fileName>/home/marcos/log2.txt</fileName>
+	</fileAppender>
+	<customAppender>
+		<className>ar.fiuba.tecnicas.tp1.appenders.SimpleCustomAppender</className>
+		<param>Custom Appender Info:</param>
+		<param>Unimportant</param>
+	</customAppender>	
+</configuration>

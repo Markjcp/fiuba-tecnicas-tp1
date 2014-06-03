@@ -36,4 +36,20 @@ public class LoggingCommonsTests {
 		logger.log(Level.INFO, "mustLoggingTest");
 		assertEquals(hasAppend(logger.getConfigurationCopy().getLoggerAppenders()),false);
 	}
+	
+	@Test
+	public void testMultipleLoggers(){
+		
+		mockFactory.setLevel(Level.INFO);
+		Logger logger1 = mockFactory.createLogger();
+		logger1.log(Level.WARN, "log from logger1");
+		
+		mockFactory.setLevel(Level.WARN);
+		Logger logger2 = mockFactory.createLogger();
+		logger2.log(Level.WARN, "log from logger2");
+		
+		assertEquals(hasAppend(logger1.getConfigurationCopy().getLoggerAppenders()),true);
+		assertEquals(hasAppend(logger2.getConfigurationCopy().getLoggerAppenders()),true);
+	}	
+		
 }

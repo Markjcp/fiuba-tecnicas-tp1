@@ -34,8 +34,7 @@ public class MessageFormatApplier {
 	}
 	
 	/**
-	 * Método que devuelve el mensaje formateado según el formato especificado en 
-	 * el archivo de propiedades.
+	 * Método que devuelve el mensaje formateado según el formato especificado
 	 * @param message
 	 * @param level
 	 * @param loggerName

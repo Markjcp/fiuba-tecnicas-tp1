@@ -82,7 +82,8 @@ public class CreationTests {
 		Logger logger2 = factory2.createLogger();
 		assertEquals(logger1.equals(logger2), true);
 	}
-
+	
+	
 	@Test
 	public void testConfigurationBuilder() {
 		LoggerConfiguration conf1 = builder.setAppenders(appenders)

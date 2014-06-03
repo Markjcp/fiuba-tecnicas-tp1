@@ -7,5 +7,5 @@ public interface Filter {
 	 * @param message
 	 * @return Si el mensaje pasa el filtro o no.
 	 */
-	public boolean applyFilter(String message);
+	public boolean applyFilter(LogMessage message);
 }

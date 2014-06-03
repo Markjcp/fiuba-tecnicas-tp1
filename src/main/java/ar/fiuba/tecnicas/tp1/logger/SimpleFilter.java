@@ -12,8 +12,9 @@ public class SimpleFilter implements Filter {
 		this.filterRegex = "";
 	}
 	
-	public boolean applyFilter(String message) {
-		return this.filterRegex.isEmpty() ? true : message.matches(this.filterRegex);
+	public boolean applyFilter(LogMessage message) {
+		return this.filterRegex.isEmpty() ? true : 
+			message.getMessage().matches(this.filterRegex);
 	}
 	
 	public void setFilterRegex(String filterRegex){

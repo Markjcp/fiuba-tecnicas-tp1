@@ -1,7 +1,6 @@
 package ar.fiuba.tecnicas.tp1.logger;
 
 import java.util.List;
-import java.util.Vector;
 
 import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 
@@ -15,23 +14,18 @@ public class Logger {
 	
 	private MessageFormatApplier messageFormatApplier;
 	
-	private Vector<Filter> filters = new Vector<Filter>();
+	private FilterManager filters = new FilterManager();
 	
 	public void addFilter(Filter filter) {
-		this.filters.add(filter);
+		this.filters.addFilter(filter);
 	}
 	
 	public void removeFilter(Filter filter) {
-		this.filters.remove(filter);
+		this.filters.removeFilter(filter);
 	}
 	
-	public boolean isLoggable(String message) {
-		for (int i = 0; i < this.filters.size(); i++) {
-			if (this.filters.elementAt(i).applyFilter(message) == false) {
-				return false;
-			}
-		}
-		return true;
+	public boolean isLoggable(LogMessage message) {
+		return this.filters.messageOvercomesFilters(message);
 	}
 
 	public Logger(LoggerConfigurable configuration) {
@@ -68,11 +62,8 @@ public class Logger {
 	 * @param message el mensaje a loguear
 	 */
 	public void log(Level level, String message) {
-		if (this.isLoggable(message)) {
-			log(level,
-				new SimpleLogMessage(message, messageFormatApplier.buildMessage(
-						message, level, getLoggerName())));
-		}
+		log(level, new SimpleLogMessage(message, messageFormatApplier.buildMessage(
+			message, level, getLoggerName())));
 	}
 	
 	/**
@@ -82,13 +73,10 @@ public class Logger {
 	 * @param format el nuevo formato
 	 */
 	public void log(Level level, String message, String format) {
-		if (this.isLoggable(message)) {
-			MessageFormat anotherFormat = new MessageFormat(format, this.configuration.getSeparator());
-			MessageFormatApplier anotherApplier = new MessageFormatApplier(anotherFormat);
-			log(level,
-				new SimpleLogMessage(message, anotherApplier.buildMessage(
-						message, level, getLoggerName())));
-		}
+		MessageFormat anotherFormat = new MessageFormat(format, this.configuration.getSeparator());
+		MessageFormatApplier anotherApplier = new MessageFormatApplier(anotherFormat);
+		log(level, new SimpleLogMessage(message, anotherApplier.buildMessage(
+			message, level, getLoggerName())));
 	}
 	
 	/**
@@ -98,11 +86,8 @@ public class Logger {
 	 * @param t el throwable de donde se tomara la descripción
 	 */
 	public void log(Level level, String message, Throwable t){
-		if (this.isLoggable(message)) {
-			log(level,
-				new SimpleLogMessage(message + " " + t.getMessage(), messageFormatApplier.buildMessage(
-						message, level, getLoggerName())));
-		}
+		log(level, new SimpleLogMessage(message + " " + t.getMessage(), 
+			messageFormatApplier.buildMessage(message, level, getLoggerName())));
 	}
 
 	/**
@@ -121,7 +106,7 @@ public class Logger {
 	 * @param message el mensaje a loguear
 	 */
 	public void log(Level level, LogMessage message) {
-		if (skipLogging(level) || !this.isLoggable(message.getMessage())) {
+		if (skipLogging(level) || !this.isLoggable(message)) {
 			return;
 		}
 		List<LoggerAppender> appenders = configuration.getLoggerAppenders();

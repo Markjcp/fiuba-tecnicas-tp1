@@ -14,8 +14,15 @@
 		<fileName>/home/marcos/log2.txt</fileName>
 	</fileAppender>
 	<customAppender>
-		<className>ar.fiuba.tecnicas.tp1.appenders.SimpleCustomAppender</className>
-		<param>Custom Appender Info:</param>
-		<param>Unimportant</param>
-	</customAppender>	
+		<className>ar.fiuba.tecnicas.tp1.appenders.SimpleCustomAppender
+		</className>
+		<param>
+			<key>param1</key>
+			<value>Custom Appender Info:</value>
+		</param>
+		<param>
+			<key>param2</key>
+			<value>Unimportant</value>
+		</param>
+	</customAppender>
 </configuration>

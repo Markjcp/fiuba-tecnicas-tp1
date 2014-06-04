@@ -43,6 +43,7 @@ public class LoggerConfigurationBuilder {
 		return this;
 	}
 	
+	
 	public LoggerConfigurationBuilder setSeparator(String separator){
 		configuration.setSeparator(separator);
 		return this;

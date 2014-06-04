@@ -2,10 +2,20 @@ package ar.fiuba.tecnicas.tp1;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
+import ar.fiuba.tecnicas.tp1.appenders.ConsoleAppender;
+import ar.fiuba.tecnicas.tp1.appenders.LoggerAppender;
 import ar.fiuba.tecnicas.tp1.exceptions.FormatNotFoundException;
+import ar.fiuba.tecnicas.tp1.logger.Level;
+import ar.fiuba.tecnicas.tp1.logger.Logger;
+import ar.fiuba.tecnicas.tp1.logger.LoggerConfiguration;
+import ar.fiuba.tecnicas.tp1.logger.LoggerConfigurationBuilder;
 import ar.fiuba.tecnicas.tp1.logger.MessageFormat;
+import ar.fiuba.tecnicas.tp1.test.MockFactory;
 
 public class FormatTests {
 
@@ -73,6 +83,28 @@ public class FormatTests {
 	public void testMethodNameIsNotVisible() {
 		MessageFormat mf = new MessageFormat("%p-%L", "-");
 		mf.getMethodNameIndexInFormat();
+	}
+	
+	@Test
+	public void testJSONFormatStyle() {
+		List<LoggerAppender> appenders;
+		appenders = new ArrayList<LoggerAppender>();
+		appenders.add(new ConsoleAppender());
+		
+		LoggerConfigurationBuilder builder = new LoggerConfigurationBuilder();
+		LoggerConfiguration conf1 = builder.setAppenders(appenders)
+				.setEnabled(true).setFormat("%m").setLevel(Level.INFO)
+				.setSeparator("-").build();
+		MessageFormat mf = new MessageFormat("%m-%g","-","JSON");
+		conf1.setFormat(mf);
+		conf1.addAppender(new ConsoleAppender());
+		
+		Logger logger2 = new Logger(conf1);
+		logger2.log(Level.INFO, "log from loggerJSON");
+		
+		assertEquals(true,true);
+		
+		
 	}
 
 }

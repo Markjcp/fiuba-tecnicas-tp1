@@ -100,11 +100,10 @@ public class MessageFormatApplier {
 		
 		String result="";
 		
-		if (this.messageFormat.getFormatStyle() != "")
-		{
+		if (this.messageFormat.getFormatStyle() != ""){
 			result = applyStyle(modifiers);
 		}
-		else{
+		else {
 			for  (String modifier : modifiers.values()) {
 				if(!modifier.isEmpty()){
 					result += modifier + " " + getDelimiter() + " ";				
@@ -125,7 +124,7 @@ public class MessageFormatApplier {
 	 * @return mensaje con el estilo que corresponda
 	 */
 	private String applyStyle(HashMap<String, String> modifiers) {
-		if (this.messageFormat.getFormatStyle() != "JSON"){
+		if (this.messageFormat.getFormatStyle() == "JSON"){
 			JSONObject jsonObject = new JSONObject();
 			
 			try

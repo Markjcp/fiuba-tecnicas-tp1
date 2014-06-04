@@ -51,5 +51,6 @@ public class LoggingCommonsTests {
 		assertEquals(hasAppend(logger1.getConfigurationCopy().getLoggerAppenders()),true);
 		assertEquals(hasAppend(logger2.getConfigurationCopy().getLoggerAppenders()),false);
 	}	
-		
+	
+
 }

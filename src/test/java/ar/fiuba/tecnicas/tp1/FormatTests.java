@@ -62,6 +62,12 @@ public class FormatTests {
 		MessageFormat mf = new MessageFormat("%d{dd:MM:yy}-%p-%M-%L", "-");
 		assertEquals(mf.getMethodNameIndexInFormat(), 2);
 	}
+	
+	@Test
+	public void testClassNameIsVisisble() {
+		MessageFormat mf = new MessageFormat("%d{dd:MM:yy}-%p-%M-%L-%g", "-");
+		assertEquals(mf.getClassNameIndexInFormat(), 4);
+	}
 
 	@Test(expected=FormatNotFoundException.class)
 	public void testMethodNameIsNotVisible() {

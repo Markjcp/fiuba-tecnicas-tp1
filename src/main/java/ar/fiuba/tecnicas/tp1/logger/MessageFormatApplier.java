@@ -78,6 +78,11 @@ public class MessageFormatApplier {
 			modifiers[methodNameIndex]= getMethodName();
 		} catch (FormatNotFoundException unimportant) {}
 		
+		try {
+			int classNameIndex = messageFormat.getClassNameIndexInFormat();
+			modifiers[classNameIndex]= getClassName();
+		} catch (FormatNotFoundException unimportant) {}
+		
 		String result="";
 		for (String modifier : modifiers) {
 			if(!modifier.isEmpty()){
@@ -149,6 +154,16 @@ public class MessageFormatApplier {
 	 */
 	private String getMethodName() {
 		return Thread.currentThread().getStackTrace()[4].getMethodName();
+	}
+	
+	/**
+	 * Método que devuelve el nombre de la clase según el formato que obtuvo el MessageFormat.
+	 * Si no se especificó el nombre de la clase en el formato, 
+	 * entonces se devuelve un string vacío.
+	 * @return nombre de la clase si corresponde
+	 */
+	private String getClassName() {
+		return Thread.currentThread().getStackTrace()[3].getClassName();
 	}
 	
 	/**

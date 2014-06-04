@@ -141,4 +141,13 @@ public class MessageFormat {
 		return getIndexInFormat("%M");
 	}
 	
+	/**
+	 * Comprueba si en el formato se especificó el nombre de la clase
+	 * (es decir, contiene un %g) para ser mostrada en el mensaje de log
+	 * @return La posición en el formatl del nombre de la clase o NOT_FOUND_FORMAT_CODE
+	 */
+	public int getClassNameIndexInFormat() {
+		return getIndexInFormat("%g");
+	}
+	
 }

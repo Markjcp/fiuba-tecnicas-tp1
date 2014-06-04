@@ -14,8 +14,7 @@
 		<fileName>/home/marcos/log2.txt</fileName>
 	</fileAppender>
 	<customAppender>
-		<className>ar.fiuba.tecnicas.tp1.appenders.SimpleCustomAppender
-		</className>
+		<className>ar.fiuba.tecnicas.tp1.appenders.SimpleCustomAppender</className>
 		<param>
 			<key>param1</key>
 			<value>Custom Appender Info:</value>

@@ -3,8 +3,8 @@ package ar.fiuba.tecnicas.tp1.logger;
 import java.util.HashMap;
 import java.util.Map;
 
+import ar.fiuba.tecnicas.tp1.factory.ComposedLoggerFactory;
 import ar.fiuba.tecnicas.tp1.factory.LoggerFactory;
-import ar.fiuba.tecnicas.tp1.factory.SimpleLoggerFactory;
 
 /**
  * Encargado de admnistrar los loggers. Singleton 
@@ -42,7 +42,7 @@ public class LoggerManager {
 			return result;
 		}
 		if(factory==null){
-			factory=new SimpleLoggerFactory();
+			factory=new ComposedLoggerFactory();
 		}
 		Logger newLogger= factory.createLogger();
 		loggers.put(name, newLogger);

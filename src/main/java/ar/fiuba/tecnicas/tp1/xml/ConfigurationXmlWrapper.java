@@ -72,5 +72,46 @@ public class ConfigurationXmlWrapper {
 	@XmlElement(name="customAppender")
 	public void setCustomAppenders(List<CustomAppenderXmlWrapper> customAppenders) {
 		this.customAppenders = customAppenders;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ConfigurationXmlWrapper other = (ConfigurationXmlWrapper) obj;
+		if (console != other.console)
+			return false;
+		if (customAppenders == null) {
+			if (other.customAppenders != null)
+				return false;
+		} else if (customAppenders.size() != other.customAppenders.size())
+			return false;
+		if (fileAppenders == null) {
+			if (other.fileAppenders != null)
+				return false;
+		} else if (fileAppenders.size() != other.fileAppenders.size())
+			return false;
+		if (format == null) {
+			if (other.format != null)
+				return false;
+		} else if (!format.equals(other.format))
+			return false;
+		if (level == null) {
+			if (other.level != null)
+				return false;
+		} else if (!level.equals(other.level))
+			return false;
+		if (separator == null) {
+			if (other.separator != null)
+				return false;
+		} else if (!separator.equals(other.separator))
+			return false;
+		return true;
+	}
+	
+	
 }

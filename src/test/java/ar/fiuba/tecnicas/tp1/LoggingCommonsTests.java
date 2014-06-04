@@ -46,10 +46,10 @@ public class LoggingCommonsTests {
 		
 		mockFactory.setLevel(Level.WARN);
 		Logger logger2 = mockFactory.createLogger();
-		logger2.log(Level.WARN, "log from logger2");
+		logger2.log(Level.INFO, "log from logger2");
 		
 		assertEquals(hasAppend(logger1.getConfigurationCopy().getLoggerAppenders()),true);
-		assertEquals(hasAppend(logger2.getConfigurationCopy().getLoggerAppenders()),true);
+		assertEquals(hasAppend(logger2.getConfigurationCopy().getLoggerAppenders()),false);
 	}	
 		
 }

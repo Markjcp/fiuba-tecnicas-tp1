@@ -1,20 +1,24 @@
 package ar.fiuba.tecnicas.tp1.logger;
 
-import java.util.Hashtable;
+import java.util.Vector;
 
 public class CustomFilter implements Filter {
 
-	private Hashtable<String, String> filters;
+	private Vector<Filter> filters;
 	
 	public CustomFilter() {
-		this.filters = new Hashtable<String, String>();
+		this.filters = new Vector<Filter>();
 	}
 	
 	public boolean applyFilter(LogMessage message) {
+		for (int i = 0; i < filters.size(); i++) {
+			if (filters.elementAt(i).applyFilter(message) == false)
+				return false;
+		}
 		return true;
 	}
 	
-	public void setFilter(String modifier, String filter) {
-		filters.put(modifier, filter);
+	public void setFilter(Filter filter) {
+		this.filters.add(filter);
 	}
 }

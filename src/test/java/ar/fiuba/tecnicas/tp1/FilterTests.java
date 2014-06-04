@@ -18,7 +18,7 @@ public class FilterTests {
 
 	@Before
 	public void setUp() throws Exception {
-		this.filter = new SimpleFilter();
+		this.filter = new SimpleFilter("Message");
 		this.message1 = new SimpleLogMessage("En la vida hay cosas mas importantes que el dinero, pero cuestan mucho");
 		this.message2 = new SimpleLogMessage("Mientras llegas a tu destino, disfruta del camino");
 		this.message3 = new SimpleLogMessage("El que busca la verdad corre el riesgo de encontrarla.");

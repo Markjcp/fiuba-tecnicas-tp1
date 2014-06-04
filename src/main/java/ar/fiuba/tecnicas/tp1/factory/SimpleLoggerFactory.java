@@ -36,6 +36,7 @@ public class SimpleLoggerFactory implements LoggerFactory {
 		level = Level.getLevelFromString((String) properties
 				.getProperty(CreationConstants.LEVEL_KEY));
 		format = properties.getProperty(CreationConstants.FORMAT_KEY);
+		
 		separator = properties.getProperty(CreationConstants.SEPARATOR_KEY);
 
 		Logger logger = new Logger(new LoggerConfigurationBuilder()

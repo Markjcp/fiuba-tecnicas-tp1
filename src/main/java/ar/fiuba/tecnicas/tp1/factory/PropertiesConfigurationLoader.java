@@ -25,12 +25,14 @@ public class PropertiesConfigurationLoader implements ConfigurationLoader {
 		List<LoggerAppender> appenders = null;
 		Level level = null;
 		String format = "";
+		String formatStyle="";
 		String separator = "";
 		appenders = PropertiesLoaderUtils
 				.loadAppendersFromProperties(properties);
 		level = Level.getLevelFromString((String) properties
 				.getProperty(CreationConstants.LEVEL_KEY));
 		format = properties.getProperty(CreationConstants.FORMAT_KEY);
+		formatStyle = properties.getProperty(CreationConstants.FORMAT_STYLE_KEY);
 		separator = properties.getProperty(CreationConstants.SEPARATOR_KEY);
 		return new LoggerConfigurationBuilder().setEnabled(true)
 				.setLevel(level).setAppenders(appenders).setFormat(format)

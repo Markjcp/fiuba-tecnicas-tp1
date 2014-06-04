@@ -3,8 +3,14 @@ package ar.fiuba.tecnicas.tp1.logger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+
+import org.json.JSONObject;
+import org.json.JSONException;
+
 
 import ar.fiuba.tecnicas.tp1.exceptions.FormatNotFoundException;
+
 
 /**
  * Esta clase se encarga de aplicar el formato que obtiene de MessageFormat a un 
@@ -42,59 +48,106 @@ public class MessageFormatApplier {
 	 */
 	public String buildMessage(String message, Level level, String loggerName){
 		int size = messageFormat.getModifiersSize();
-		String[] modifiers = new String[size];
+		//String[] modifiers = new String[size];
+		HashMap<String, String> modifiers = new HashMap<String,String>();
 		try {
 			int dateIndex = messageFormat.getDateIndexInFormat();
-			modifiers[dateIndex]= getDate();
+			modifiers.put("date", getDate());
+			//modifiers[dateIndex]= getDate();
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int levelIndex = messageFormat.getlevelIndexInFormat();
-			modifiers[levelIndex]=getLevel(level);
+			modifiers.put("level", getDate());
+			//modifiers[levelIndex]=getLevel(level);
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int threadIndex = messageFormat.getThreadIndexInFormat();
-			modifiers[threadIndex]=getCurrentThread();
+			modifiers.put("thread", getCurrentThread());
+			//modifiers[threadIndex]=getCurrentThread();
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int messageIndex = messageFormat.getMessageIndexInFormat();
-			modifiers[messageIndex]=getMessage(message);
+			modifiers.put("message", getMessage(message));
+			//modifiers[messageIndex]=getMessage(message);
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int lineNumberIndex = messageFormat.getLineNumberIndexInFormat();
-			modifiers[lineNumberIndex]= getLineNumber();
+			modifiers.put("line", getLineNumber());
+			//modifiers[lineNumberIndex]= getLineNumber();
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int fileNameIndex = messageFormat.getFileNameIndexInFormat();
-			modifiers[fileNameIndex]=getFileName(loggerName);
+			modifiers.put("File Name", getFileName(loggerName));
+			//modifiers[fileNameIndex]=getFileName(loggerName);
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int methodNameIndex = messageFormat.getMethodNameIndexInFormat();
-			modifiers[methodNameIndex]= getMethodName();
+			modifiers.put("Method Name", getMethodName());
+			//modifiers[methodNameIndex]= getMethodName();
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int classNameIndex = messageFormat.getClassNameIndexInFormat();
-			modifiers[classNameIndex]= getClassName();
+			modifiers.put("Class Name", getClassName());
+			//modifiers[classNameIndex]= getClassName();
 		} catch (FormatNotFoundException unimportant) {}
 		
 		String result="";
-		for (String modifier : modifiers) {
-			if(!modifier.isEmpty()){
-				result += modifier + " " + getDelimiter() + " ";				
+		
+		if (this.messageFormat.getFormatStyle() != "")
+		{
+			result = applyStyle(modifiers);
+		}
+		else{
+			for  (String modifier : modifiers.values()) {
+				if(!modifier.isEmpty()){
+					result += modifier + " " + getDelimiter() + " ";				
+				}
+			}
+			if(!result.equals("")){
+				result=result.substring(0, result.length() - getDelimiter().length() -2);
 			}
 		}
-		if(!result.equals("")){
-			result=result.substring(0, result.length() - getDelimiter().length() -2);
-		}
+		
 		return result;
 		
 	}
+	
+	/**
+	 * Método que devuelve el mensaje con el estilo especificado en la configuracion.
+	 * Si no se especificó se retorna igual que como fue ingresado.
+	 * @return mensaje con el estilo que corresponda
+	 */
+	private String applyStyle(HashMap<String, String> modifiers) {
+		if (this.messageFormat.getFormatStyle() != "JSON"){
+			JSONObject jsonObject = new JSONObject();
+			
+			try
+			{
+				for (String key : modifiers.keySet())
+				{
+				    String value = modifiers.get(key);
+			
+					jsonObject.put(key, value);
+			    }
+			}
+			catch (JSONException e)
+			{
+				return "";
+			}
+		
+			return jsonObject.toString();    
+	}
+		return "";
+		
+	}
+	
 	
 	/**
 	 * Método que devuelve la fecha según el formato que obtuvo el MessageFormat.

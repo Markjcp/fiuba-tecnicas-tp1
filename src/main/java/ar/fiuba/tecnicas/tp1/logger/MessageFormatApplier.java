@@ -58,7 +58,7 @@ public class MessageFormatApplier {
 		
 		try {
 			int levelIndex = messageFormat.getlevelIndexInFormat();
-			modifiers.put("level", getDate());
+			modifiers.put("level", getLevel(level));
 			//modifiers[levelIndex]=getLevel(level);
 		} catch (FormatNotFoundException unimportant) {}
 		

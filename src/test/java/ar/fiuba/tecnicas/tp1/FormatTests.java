@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import ar.fiuba.tecnicas.tp1.appenders.ConsoleAppender;
@@ -15,7 +17,7 @@ import ar.fiuba.tecnicas.tp1.logger.Logger;
 import ar.fiuba.tecnicas.tp1.logger.LoggerConfiguration;
 import ar.fiuba.tecnicas.tp1.logger.LoggerConfigurationBuilder;
 import ar.fiuba.tecnicas.tp1.logger.MessageFormat;
-import ar.fiuba.tecnicas.tp1.test.MockFactory;
+import ar.fiuba.tecnicas.tp1.logger.MessageFormatApplier;
 
 public class FormatTests {
 
@@ -95,15 +97,22 @@ public class FormatTests {
 		LoggerConfiguration conf1 = builder.setAppenders(appenders)
 				.setEnabled(true).setFormat("%m").setLevel(Level.INFO)
 				.setSeparator("-").build();
-		MessageFormat mf = new MessageFormat("%m-%g","-","JSON");
+		MessageFormat mf = new MessageFormat("%d{dd:MM:yy}-%p-%M-%L-%g", "-","JSON");
 		conf1.setFormat(mf);
 		conf1.addAppender(new ConsoleAppender());
 		
+		MessageFormatApplier mfa = new MessageFormatApplier(mf);
 		Logger logger2 = new Logger(conf1);
-		logger2.log(Level.INFO, "log from loggerJSON");
+		String jsonString = mfa.buildMessage("Logger JSON format", Level.INFO, logger2.getLoggerName());
 		
-		assertEquals(true,true);
+		boolean value = true;
 		
+		try {
+	        JSONObject json = new JSONObject(jsonString);
+	    } catch (JSONException e) {
+	    	assertEquals(false,value);
+	    }
+		assertEquals(true,value);	
 		
 	}
 

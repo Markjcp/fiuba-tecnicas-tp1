@@ -32,10 +32,13 @@ public class SimpleLoggerFactory implements LoggerFactory {
 		Level level = null;
 		String format = "";
 		String separator = "";
+		String formatStyle = "";
+		
 		appenders = PropertiesLoaderUtils.loadAppendersFromProperties(properties);
 		level = Level.getLevelFromString((String) properties
 				.getProperty(CreationConstants.LEVEL_KEY));
 		format = properties.getProperty(CreationConstants.FORMAT_KEY);
+		formatStyle = properties.getProperty(CreationConstants.FORMAT_STYLE_KEY);
 		
 		separator = properties.getProperty(CreationConstants.SEPARATOR_KEY);
 

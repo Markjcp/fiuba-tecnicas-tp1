@@ -14,6 +14,7 @@ import ar.fiuba.tecnicas.tp1.exceptions.FormatNotFoundException;
 public class MessageFormat {
 	
 	private Vector<String> format;
+	private String formatStyle="";
 	private String delimiter;
 	
 	/**
@@ -40,6 +41,19 @@ public class MessageFormat {
 		this.format = new Vector<String>(Arrays.asList(format.split(delimiter)));
 	}
 	
+	/** Crea un MessageFormat a partir de un string, un estilo y un delimitador.
+	 * Para el formato del dia se aceptan los mismos que para SimpleDateFormat.
+	 * Un ejemplo de formato podría ser: %d{HH:mm:ss} %p %t %m
+	 * @param format
+	 * @param delimiter
+	 * @param formatStyle
+	 */
+	public MessageFormat(String format, String delimiter, String formatStyle) {
+		this.delimiter = delimiter;
+		this.format = new Vector<String>(Arrays.asList(format.split(delimiter)));
+		this.formatStyle = formatStyle;
+	}
+	
 	/**
 	 * Método que obtiene la cantidad de formatos aplicados.
 	 * @return Cantidad de elementos de formato.
@@ -49,11 +63,19 @@ public class MessageFormat {
 	}
 	
 	/**
-	 * Método que devuelve el separador definido en el archivo de propiedades.
+	 * Método que devuelve el separador definido en la configuracion.
 	 * @return Separador.
 	 */
 	public String getDelimiter() {
 		return this.delimiter;
+	}
+	
+	/**
+	 * Método que devuelve el style definido en la configuracion.
+	 * @return formatStyle.
+	 */
+	public String getFormatStyle() {
+		return this.formatStyle;
 	}
 	
 	/**

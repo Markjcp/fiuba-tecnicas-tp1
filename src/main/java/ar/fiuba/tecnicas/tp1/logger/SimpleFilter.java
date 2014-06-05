@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public class SimpleFilter implements Filter {
 	
-	private String filterRegex;
+	private String filterRegex = "";
 	
-	private String filterName;
+	private String filterName = "";
 
 	private String getMessageSlice(LogMessage message) {
 		HashMap<String,String> slicedMessage = message.getSlicedMessage();

@@ -106,7 +106,10 @@ public class Logger {
 	 * @param message el mensaje a loguear
 	 */
 	public void log(Level level, LogMessage message) {
-		if (skipLogging(level) || !this.isLoggable(message)) {
+		LogMessage lastFormattedMessage = 
+			new SimpleLogMessage(messageFormatApplier.getLastFormattedMessage());  
+		if (skipLogging(level) || 
+				!this.isLoggable(lastFormattedMessage)) {
 			return;
 		}
 		List<LoggerAppender> appenders = configuration.getLoggerAppenders();

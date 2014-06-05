@@ -1,5 +1,7 @@
 package ar.fiuba.tecnicas.tp1.logger;
 
+import java.util.HashMap;
+
 public class SimpleFilter implements Filter {
 	
 	private String filterRegex;
@@ -7,9 +9,10 @@ public class SimpleFilter implements Filter {
 	private String filterName;
 
 	private String getMessageSlice(LogMessage message) {
+		HashMap<String,String> slicedMessage = message.getSlicedMessage();
 		String slice = "";
-		if (filterName == "Message") {
-			slice = message.getMessage();
+		if (slicedMessage.containsKey(filterName)) {
+			slice = slicedMessage.get(filterName);
 		}
 		return slice;
 	}

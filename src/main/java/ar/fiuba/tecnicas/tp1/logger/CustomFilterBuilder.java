@@ -8,39 +8,39 @@ public class CustomFilterBuilder {
 		this.customFilter = new CustomFilter();
 	}
 	
-	public CustomFilter setFilterByDate(String dateFilter) {
-		this.customFilter.setFilter((Filter)new SimpleFilter("Date", dateFilter));
-		return customFilter;
+	public CustomFilterBuilder setFilterByDate(String dateFilter) {
+		this.customFilter.setFilter((Filter)new SimpleFilter("date", dateFilter));
+		return this;
 	}
 	
-	public CustomFilter setFilterByLevel(String levelFilter) {
-		this.customFilter.setFilter((Filter)new SimpleFilter("Level", levelFilter));
-		return customFilter;
+	public CustomFilterBuilder setFilterByLevel(String levelFilter) {
+		this.customFilter.setFilter((Filter)new SimpleFilter("level", levelFilter));
+		return this;
 	}
 	
-	public CustomFilter setFilterByThread(String threadFilter) {
-		this.customFilter.setFilter((Filter)new SimpleFilter("Thread", threadFilter));
-		return customFilter;
+	public CustomFilterBuilder setFilterByThread(String threadFilter) {
+		this.customFilter.setFilter((Filter)new SimpleFilter("thread", threadFilter));
+		return this;
 	}
 	
-	public CustomFilter setFilterByMessage(String messageFilter) {
-		this.customFilter.setFilter((Filter)new SimpleFilter("Message", messageFilter));
-		return customFilter;
+	public CustomFilterBuilder setFilterByMessage(String messageFilter) {
+		this.customFilter.setFilter((Filter)new SimpleFilter("message", messageFilter));
+		return this;
 	}
 	
-	public CustomFilter setFilterByLineNumber(String lineNumberFilter) {
-		this.customFilter.setFilter((Filter)new SimpleFilter("LineNumber", lineNumberFilter));
-		return customFilter;
+	public CustomFilterBuilder setFilterByLineNumber(String lineNumberFilter) {
+		this.customFilter.setFilter((Filter)new SimpleFilter("line", lineNumberFilter));
+		return this;
 	}
 	
-	public CustomFilter setFilterByFileName(String fileNameFilter) {
-		this.customFilter.setFilter((Filter)new SimpleFilter("FileName", fileNameFilter));
-		return customFilter;
+	public CustomFilterBuilder setFilterByFileName(String fileNameFilter) {
+		this.customFilter.setFilter((Filter)new SimpleFilter("File Name", fileNameFilter));
+		return this;
 	}
 	
-	public CustomFilter setFilterByMethodName(String methodNameFilter) {
-		this.customFilter.setFilter((Filter)new SimpleFilter("MethodName", methodNameFilter));
-		return customFilter;
+	public CustomFilterBuilder setFilterByMethodName(String methodNameFilter) {
+		this.customFilter.setFilter((Filter)new SimpleFilter("Method Name", methodNameFilter));
+		return this;
 	}
 	
 	public CustomFilter build() {

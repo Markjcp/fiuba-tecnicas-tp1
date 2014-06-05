@@ -21,6 +21,8 @@ public class MessageFormatApplier {
 		
 	private MessageFormat messageFormat;
 	
+	private HashMap<String, String> lastFormattedMessage = new HashMap<String, String>();
+	
 	/**
 	 * Constructor que a partir de un formato y un delimitador, devuelve un 
 	 * MessageFormatApplier
@@ -37,6 +39,15 @@ public class MessageFormatApplier {
 	 */
 	public MessageFormatApplier(MessageFormat format) {
 		this.messageFormat = format;
+	}
+	
+	/**
+	 * Devuelve el ultimo mensaje formateado. Se utiliza para obtener el mensaje
+	 * en partes y no en un String ya construido.
+	 * @return Ultimo Mensaje formateado
+	 */
+	public HashMap<String, String> getLastFormattedMessage() {
+		return this.lastFormattedMessage;
 	}
 	
 	/**
@@ -113,6 +124,8 @@ public class MessageFormatApplier {
 				result=result.substring(0, result.length() - getDelimiter().length() -2);
 			}
 		}
+		
+		this.lastFormattedMessage = modifiers;
 		
 		return result;
 		

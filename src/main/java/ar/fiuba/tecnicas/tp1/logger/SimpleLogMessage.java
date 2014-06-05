@@ -1,5 +1,7 @@
 package ar.fiuba.tecnicas.tp1.logger;
 
+import java.util.HashMap;
+
 /**
  * Implementación básica de un registro de log
  */
@@ -13,6 +15,12 @@ public class SimpleLogMessage implements LogMessage{
 	
 	private String loggerName;
 	
+	private HashMap<String,String> slicedMessage = new HashMap<String, String>();
+	
+	public SimpleLogMessage(HashMap<String,String> slicedMessage) {
+		this.slicedMessage = slicedMessage;
+	}
+	
 	public SimpleLogMessage(String message) {
 		super();
 		this.message = message;
@@ -22,6 +30,10 @@ public class SimpleLogMessage implements LogMessage{
 		super();
 		this.message = message;
 		this.formattedMessage = formattedMessage;
+	}
+
+	public HashMap<String, String> getSlicedMessage() {
+		return this.slicedMessage;
 	}
 
 	public String getMessage() {

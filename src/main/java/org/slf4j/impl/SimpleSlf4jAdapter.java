@@ -1,10 +1,8 @@
-package ar.fiuba.tecnicas.tp1.slf4j;
+package org.slf4j.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.helpers.MarkerIgnoringBase;
 
-import ar.fiuba.tecnicas.tp1.factory.LoggerFactory;
-import ar.fiuba.tecnicas.tp1.factory.SimpleLoggerFactory;
 import ar.fiuba.tecnicas.tp1.logger.Level;
 
 /**
@@ -23,9 +21,8 @@ public class SimpleSlf4jAdapter extends MarkerIgnoringBase implements Logger{
 	
 	private ar.fiuba.tecnicas.tp1.logger.Logger logger;
 	
-	public SimpleSlf4jAdapter(){
-		LoggerFactory factory = new SimpleLoggerFactory();
-		logger=factory.createLogger();
+	public SimpleSlf4jAdapter(ar.fiuba.tecnicas.tp1.logger.Logger mainLogger){
+		logger=mainLogger;
 	}
 
 	public String getName() {

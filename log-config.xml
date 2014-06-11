@@ -3,6 +3,7 @@
 	<level>INFO</level>
 	<separator>-</separator>
 	<format>%m-%d{HH:mm:ss}-%t-%p-%L-%F-%M</format>
+	<json>false</json>
 	<console>true</console>
 	<fileAppender>
 		<fileName>/home/marcos/log0.txt</fileName>

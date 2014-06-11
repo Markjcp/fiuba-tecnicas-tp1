@@ -110,18 +110,18 @@ public class MessageFormatApplier {
 		} catch (FormatNotFoundException unimportant) {}
 		
 		String result="";
-		
-		if (this.messageFormat.getFormatStyle() != ""){
+
+		if (this.messageFormat.isJsonAvailable()) {
 			result = applyStyle(modifiers);
-		}
-		else {
-			for  (String modifier : modifiers.values()) {
-				if(!modifier.isEmpty()){
-					result += modifier + " " + getDelimiter() + " ";				
+		} else {
+			for (String modifier : modifiers.values()) {
+				if (!modifier.isEmpty()) {
+					result += modifier + " " + getDelimiter() + " ";
 				}
 			}
-			if(!result.equals("")){
-				result=result.substring(0, result.length() - getDelimiter().length() -2);
+			if (!result.equals("")) {
+				result = result.substring(0, result.length()
+						- getDelimiter().length() - 2);
 			}
 		}
 		
@@ -137,27 +137,23 @@ public class MessageFormatApplier {
 	 * @return mensaje con el estilo que corresponda
 	 */
 	private String applyStyle(HashMap<String, String> modifiers) {
-		if (this.messageFormat.getFormatStyle() == "JSON"){
+		if (this.messageFormat.isJsonAvailable()) {
 			JSONObject jsonObject = new JSONObject();
-			
-			try
-			{
-				for (String key : modifiers.keySet())
-				{
-				    String value = modifiers.get(key);
-			
+
+			try {
+				for (String key : modifiers.keySet()) {
+					String value = modifiers.get(key);
+
 					jsonObject.put(key, value);
-			    }
-			}
-			catch (JSONException e)
-			{
+				}
+			} catch (JSONException e) {
 				return "";
 			}
-		
-			return jsonObject.toString();    
-	}
+
+			return jsonObject.toString();
+		}
 		return "";
-		
+
 	}
 	
 	

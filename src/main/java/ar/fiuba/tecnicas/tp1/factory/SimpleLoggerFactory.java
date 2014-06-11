@@ -38,11 +38,11 @@ public class SimpleLoggerFactory implements LoggerFactory {
 		level = Level.getLevelFromString((String) properties
 				.getProperty(CreationConstants.LEVEL_KEY));
 		format = properties.getProperty(CreationConstants.FORMAT_KEY);
-		formatStyle = properties.getProperty(CreationConstants.FORMAT_STYLE_KEY);
-		
+		boolean jsonEnabled = Boolean.valueOf(properties
+				.getProperty(CreationConstants.JSON_KEY));		
 		separator = properties.getProperty(CreationConstants.SEPARATOR_KEY);
 
-		Logger logger = new Logger(new LoggerConfigurationBuilder()
+		Logger logger = new Logger(new LoggerConfigurationBuilder().enableJson(jsonEnabled)
 				.setEnabled(true).setLevel(level).setAppenders(appenders)
 				.setFormat(format).setSeparator(separator).build());
 		return logger;

@@ -22,6 +22,8 @@ public class LoggerConfiguration implements LoggerConfigurable {
 	private MessageFormat messageFormat;
 
 	private String separator = "-";
+	
+	private boolean jsonAvailable = false;
 
 	public LoggerConfiguration() {
 		appenders = new ArrayList<LoggerAppender>();
@@ -115,6 +117,8 @@ public class LoggerConfiguration implements LoggerConfigurable {
 		} else if (!AppendersEqualsHelper.areAppendersEqual(appenders,
 				other.appenders))
 			return false;
+		if (jsonAvailable != other.jsonAvailable)
+			return false;
 		if (enabled != other.enabled)
 			return false;
 		if (format == null) {
@@ -133,5 +137,13 @@ public class LoggerConfiguration implements LoggerConfigurable {
 		} else if (!separator.equals(other.separator))
 			return false;
 		return true;
+	}
+
+	public boolean isJsonFormatAvailable() {
+		return this.jsonAvailable;
+	}
+
+	public void enableJsonFormat() {
+		this.jsonAvailable = true;		
 	}
 }

@@ -16,6 +16,8 @@ public class ConfigurationXmlWrapper {
 	
 	private boolean console;
 	
+	private boolean json;
+	
 	private List<FileAppenderXmlWrapper> fileAppenders;
 	
 	private List<CustomAppenderXmlWrapper> customAppenders;
@@ -54,6 +56,15 @@ public class ConfigurationXmlWrapper {
 	@XmlElement
 	public void setConsole(boolean console) {
 		this.console = console;
+	}
+	
+	public boolean isJson() {
+		return json;
+	}
+
+	@XmlElement
+	public void setJson(boolean json) {
+		this.json = json;
 	}
 
 	public List<FileAppenderXmlWrapper> getFileAppenders() {

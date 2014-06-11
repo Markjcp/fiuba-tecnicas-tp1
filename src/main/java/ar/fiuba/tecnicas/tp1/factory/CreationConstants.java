@@ -23,7 +23,9 @@ public interface CreationConstants {
 	
 	public static final String FORMAT_KEY = "logger.message.format";
 	
-	public static final String FORMAT_STYLE_KEY = "logger.message.format.style";
+	public static final String JSON_KEY = "logger.message.json";
+	
+	//public static final String FORMAT_STYLE_KEY = "logger.message.format.style";
 	
 	public static final String SEPARATOR_KEY = "logger.message.separator";
 	

@@ -31,6 +31,9 @@ public class LoggerConfigurationAdapter {
 		result.setFormat(xmlWrapper.getFormat());
 		result.setLevel(Level.getLevelFromString(xmlWrapper.getLevel()));
 		result.setSeparator(xmlWrapper.getSeparator());
+		if(xmlWrapper.isJson()){
+			result.enableJsonFormat();
+		}
 		if (xmlWrapper.isConsole()) {
 			result.addAppender(new ConsoleAppender());
 		}

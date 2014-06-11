@@ -14,8 +14,8 @@ import ar.fiuba.tecnicas.tp1.exceptions.FormatNotFoundException;
 public class MessageFormat {
 	
 	private Vector<String> format;
-	private String formatStyle="";
 	private String delimiter;
+	private boolean jsonAvailable;
 	
 	/**
 	 * Método que recibe un modifier pasado por parámetros (%p, %d, ..) y devuelve
@@ -48,10 +48,10 @@ public class MessageFormat {
 	 * @param delimiter
 	 * @param formatStyle
 	 */
-	public MessageFormat(String format, String delimiter, String formatStyle) {
+	public MessageFormat(String format, String delimiter, boolean jsonAvailable) {
 		this.delimiter = delimiter;
 		this.format = new Vector<String>(Arrays.asList(format.split(delimiter)));
-		this.formatStyle = formatStyle;
+		this.jsonAvailable = jsonAvailable;
 	}
 	
 	/**
@@ -68,14 +68,6 @@ public class MessageFormat {
 	 */
 	public String getDelimiter() {
 		return this.delimiter;
-	}
-	
-	/**
-	 * Método que devuelve el style definido en la configuracion.
-	 * @return formatStyle.
-	 */
-	public String getFormatStyle() {
-		return this.formatStyle;
 	}
 	
 	/**
@@ -171,5 +163,12 @@ public class MessageFormat {
 	public int getClassNameIndexInFormat() {
 		return getIndexInFormat("%g");
 	}
-	
+
+	public boolean isJsonAvailable() {
+		return jsonAvailable;
+	}
+
+	public void setJsonAvailable(boolean jsonAvailable) {
+		this.jsonAvailable = jsonAvailable;
+	}	
 }

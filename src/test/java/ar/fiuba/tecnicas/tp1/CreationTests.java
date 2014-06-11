@@ -50,11 +50,12 @@ public class CreationTests {
 		prop.setProperty("logger.appender.file.bench ", "/home/marcos/log1.txt");
 		prop.setProperty("logger.appender.file.third ", "/home/marcos/log2.txt");
 		prop.setProperty("logger.appender.console", "true");
+		prop.setProperty("logger.message.json", "false");		
 		prop.setProperty("logger.appender.custom.custom1.class", "ar.fiuba.tecnicas.tp1.appenders.SimpleCustomAppender");
 		prop.setProperty("logger.appender.custom.custom1.param1", "Custom Appender Info:");
 		prop.setProperty("logger.appender.custom.custom1.param2", "Unimportant");
 		prop.setProperty("logger.message.format",
-				"%m-%d{HH:mm:ss}-%t-%p-%L-%F-%M");
+				"%m%d{HH:mm:ss}-%t-%p-%L-%F-%M");
 		prop.setProperty("logger.message.separator", "-");
 	}
 

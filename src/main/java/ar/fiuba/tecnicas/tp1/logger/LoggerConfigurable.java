@@ -26,8 +26,14 @@ public interface LoggerConfigurable{
 	
 	void setSeparator(String separator);
 	
-	public void addAppender(LoggerAppender appender);
+	void addAppender(LoggerAppender appender);
 	
 	LoggerConfigurable copy();
+	
+	boolean isJsonFormatAvailable();
+	
+	void enableJsonFormat();
+	
+	
 
 }

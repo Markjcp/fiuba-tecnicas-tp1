@@ -73,7 +73,7 @@ public class Logger {
 	 * @param format el nuevo formato
 	 */
 	public void log(Level level, String message, String format) {
-		MessageFormat anotherFormat = new MessageFormat(format, this.configuration.getSeparator());
+		MessageFormat anotherFormat = new MessageFormat(format, this.configuration.getSeparator(),this.configuration.isJsonFormatAvailable());
 		MessageFormatApplier anotherApplier = new MessageFormatApplier(anotherFormat);
 		log(level, new SimpleLogMessage(message, anotherApplier.buildMessage(
 			message, level, getLoggerName())));

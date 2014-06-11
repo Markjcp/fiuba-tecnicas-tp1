@@ -112,5 +112,11 @@ public class PropertiesLoaderUtils {
 		}
 		return result;
 	}
+	
+	public static boolean isJsonEnabled(Properties properties) {
+		boolean result = Boolean.valueOf(properties
+				.getProperty(CreationConstants.JSON_KEY));
+		return result;
+	}
 
 }

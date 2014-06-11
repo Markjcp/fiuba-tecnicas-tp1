@@ -48,6 +48,13 @@ public class LoggerConfigurationBuilder {
 		configuration.setSeparator(separator);
 		return this;
 	}
+	
+	public LoggerConfigurationBuilder enableJson(boolean enabled){
+		if(enabled){
+			configuration.enableJsonFormat();			
+		}
+		return this;
+	}
 
 	/**
 	 * Método contructor

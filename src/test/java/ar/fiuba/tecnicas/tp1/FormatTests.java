@@ -97,7 +97,7 @@ public class FormatTests {
 		LoggerConfiguration conf1 = builder.setAppenders(appenders)
 				.setEnabled(true).setFormat("%m").setLevel(Level.INFO)
 				.setSeparator("-").build();
-		MessageFormat mf = new MessageFormat("%d{dd:MM:yy}-%p-%M-%L-%g", "-","JSON");
+		MessageFormat mf = new MessageFormat("%d{dd:MM:yy}-%p-%M-%L-%g", "-",true);
 		conf1.setFormat(mf);
 		conf1.addAppender(new ConsoleAppender());
 		

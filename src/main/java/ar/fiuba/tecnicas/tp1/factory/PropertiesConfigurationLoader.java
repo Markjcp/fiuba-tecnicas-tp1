@@ -25,16 +25,16 @@ public class PropertiesConfigurationLoader implements ConfigurationLoader {
 		List<LoggerAppender> appenders = null;
 		Level level = null;
 		String format = "";
-		String formatStyle="";
 		String separator = "";
+		boolean jsonEnabled = PropertiesLoaderUtils.isJsonEnabled(properties);
 		appenders = PropertiesLoaderUtils
 				.loadAppendersFromProperties(properties);
 		level = Level.getLevelFromString((String) properties
 				.getProperty(CreationConstants.LEVEL_KEY));
 		format = properties.getProperty(CreationConstants.FORMAT_KEY);
-		formatStyle = properties.getProperty(CreationConstants.FORMAT_STYLE_KEY);
+		
 		separator = properties.getProperty(CreationConstants.SEPARATOR_KEY);
-		return new LoggerConfigurationBuilder().setEnabled(true)
+		return new LoggerConfigurationBuilder().setEnabled(true).enableJson(jsonEnabled)
 				.setLevel(level).setAppenders(appenders).setFormat(format)
 				.setSeparator(separator).build();
 	}

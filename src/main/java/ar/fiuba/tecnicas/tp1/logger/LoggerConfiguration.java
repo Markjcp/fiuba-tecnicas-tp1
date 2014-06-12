@@ -63,7 +63,7 @@ public class LoggerConfiguration implements LoggerConfigurable {
 
 	public void setFormat(String format) {
 		this.format = format;
-		this.messageFormat = new MessageFormat(format, separator);
+		this.messageFormat = new MessageFormat(format, separator, jsonAvailable);
 	}
 	
 	public void setFormat(MessageFormat format){

@@ -55,7 +55,7 @@ public class CreationTests {
 		prop.setProperty("logger.appender.custom.custom1.param1", "Custom Appender Info:");
 		prop.setProperty("logger.appender.custom.custom1.param2", "Unimportant");
 		prop.setProperty("logger.message.format",
-				"%m%d{HH:mm:ss}-%t-%p-%L-%F-%M");
+				"%m-%d{HH:mm:ss}-%t-%p-%L-%F-%M");
 		prop.setProperty("logger.message.separator", "-");
 	}
 

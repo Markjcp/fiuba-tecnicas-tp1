@@ -58,55 +58,48 @@ public class MessageFormatApplier {
 	 * @return mensaje formateado.
 	 */
 	public String buildMessage(String message, Level level, String loggerName){
+		
 		int size = messageFormat.getModifiersSize();
-		//String[] modifiers = new String[size];
-		HashMap<String, String> modifiers = new HashMap<String,String>();
+		MessageItem[] modifiers = new MessageItem[size];
 		try {
 			int dateIndex = messageFormat.getDateIndexInFormat();
-			modifiers.put("date", getDate());
-			//modifiers[dateIndex]= getDate();
+			MessageItem dateItem = new MessageItem("date", getDate());
+			modifiers[dateIndex]= dateItem;
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int levelIndex = messageFormat.getlevelIndexInFormat();
-			modifiers.put("level", getLevel(level));
-			//modifiers[levelIndex]=getLevel(level);
+			modifiers[levelIndex]=new MessageItem("level", getLevel(level));
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int threadIndex = messageFormat.getThreadIndexInFormat();
-			modifiers.put("thread", getCurrentThread());
-			//modifiers[threadIndex]=getCurrentThread();
+			modifiers[threadIndex]= new MessageItem("thread", getCurrentThread());
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int messageIndex = messageFormat.getMessageIndexInFormat();
-			modifiers.put("message", getMessage(message));
-			//modifiers[messageIndex]=getMessage(message);
+			modifiers[messageIndex]= new MessageItem("message", getMessage(message));
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int lineNumberIndex = messageFormat.getLineNumberIndexInFormat();
-			modifiers.put("line", getLineNumber());
-			//modifiers[lineNumberIndex]= getLineNumber();
+			modifiers[lineNumberIndex]= new MessageItem("line", getLineNumber());
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int fileNameIndex = messageFormat.getFileNameIndexInFormat();
-			modifiers.put("File Name", getFileName(loggerName));
-			//modifiers[fileNameIndex]=getFileName(loggerName);
+			modifiers[fileNameIndex]= new MessageItem("File Name",getFileName(loggerName));
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int methodNameIndex = messageFormat.getMethodNameIndexInFormat();
-			modifiers.put("Method Name", getMethodName());
-			//modifiers[methodNameIndex]= getMethodName();
+			modifiers[methodNameIndex]= new MessageItem("Method Name",getMethodName());
 		} catch (FormatNotFoundException unimportant) {}
 		
 		try {
 			int classNameIndex = messageFormat.getClassNameIndexInFormat();
-			modifiers.put("Class Name", getClassName());
-			//modifiers[classNameIndex]= getClassName();
+			modifiers[classNameIndex]= new MessageItem("Class Name", getClassName());
 		} catch (FormatNotFoundException unimportant) {}
 		
 		String result="";
@@ -114,9 +107,9 @@ public class MessageFormatApplier {
 		if (this.messageFormat.isJsonAvailable()) {
 			result = applyStyle(modifiers);
 		} else {
-			for (String modifier : modifiers.values()) {
-				if (!modifier.isEmpty()) {
-					result += modifier + " " + getDelimiter() + " ";
+			for (MessageItem modifier : modifiers) {
+				if (!modifier.getValue().isEmpty()) {
+					result += modifier.getValue() + " " + getDelimiter() + " ";
 				}
 			}
 			if (!result.equals("")) {
@@ -125,10 +118,10 @@ public class MessageFormatApplier {
 			}
 		}
 		
-		this.lastFormattedMessage = modifiers;
-		
+		for (MessageItem messageItem : modifiers) {
+			this.lastFormattedMessage.put(messageItem.getKey(), messageItem.getValue());
+		}		
 		return result;
-		
 	}
 	
 	/**
@@ -136,15 +129,13 @@ public class MessageFormatApplier {
 	 * Si no se especificó se retorna igual que como fue ingresado.
 	 * @return mensaje con el estilo que corresponda
 	 */
-	private String applyStyle(HashMap<String, String> modifiers) {
+	private String applyStyle(MessageItem[] messageItems) {
 		if (this.messageFormat.isJsonAvailable()) {
 			JSONObject jsonObject = new JSONObject();
 
 			try {
-				for (String key : modifiers.keySet()) {
-					String value = modifiers.get(key);
-
-					jsonObject.put(key, value);
+				for (MessageItem item : messageItems) {
+					jsonObject.put(item.getKey(), item.getValue());
 				}
 			} catch (JSONException e) {
 				return "";
@@ -153,7 +144,6 @@ public class MessageFormatApplier {
 			return jsonObject.toString();
 		}
 		return "";
-
 	}
 	
 	
@@ -244,5 +234,25 @@ public class MessageFormatApplier {
 	 */
 	private String getDelimiter() {
 		return this.messageFormat.getDelimiter();
+	}
+	
+	
+	private class MessageItem{
+		private String key;
+		
+		private String value;
+		
+		public MessageItem(String key, String value){
+			this.key = key;
+			this.value = value;
+		}
+
+		public String getKey() {
+			return key;
+		}
+
+		public String getValue() {
+			return value;
+		}		
 	}
 }
